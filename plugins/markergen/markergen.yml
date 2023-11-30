@@ -1,0 +1,14 @@
+name: markergen
+description: Generate markers on save
+version: 1.0.0
+exec:
+  - markergen.js
+interface: js
+hooks:
+  - name: Marker Creation
+    description: Scene Marker creaiton
+    triggeredBy:
+      - SceneMarker.Update.Post
+      - SceneMarker.Create.Post
+    defaultArgs:
+      argKey: createMarker
