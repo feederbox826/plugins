@@ -1,0 +1,39 @@
+.detail-header-image video {
+    margin: auto;
+    max-width: 14rem;
+    transition: .5s
+}
+
+@media (max-width: 576px) {
+    .detail-header-image .movie-images video {
+        max-width:100%
+    }
+    #tag-page .detail-header-image video {
+        max-width:100%
+    }
+}
+
+#movie-page .detail-header-image .movie-images video {
+    max-width: 13rem
+}
+
+#tag-page .detail-header-image video {
+    border-radius: .5rem
+}
+
+#tag-page .full-width .detail-header-image video {
+    max-width: 22rem
+}
+
+#tag-page .detail-header.collapsed .detail-header-image video {
+    max-width: 18rem
+}
+
+#tag-page .detail-header-image video {
+    max-width: 20rem
+}
+
+video {
+    vertical-align: middle;
+    border-style: none
+}
