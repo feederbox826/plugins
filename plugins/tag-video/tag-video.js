@@ -29,4 +29,5 @@
     stash.addEventListener('page:tag', replaceAll)
     stash.addEventListener('page:tag:any', replaceAll)
     stash.addEventListener('page:tags', replaceAll)
+    replaceAll()
 })()
