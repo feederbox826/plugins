@@ -1,5 +1,6 @@
 name: rebrand
 description: Adds a name override of your choice in Stash
+# requires: StashUserscriptLibrary
 version: 0.0.1
 ui:
   requires:
