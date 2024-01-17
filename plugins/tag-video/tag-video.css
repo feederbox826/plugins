@@ -33,7 +33,8 @@
     max-width: 20rem
 }
 
-video {
+video.tag-video {
     vertical-align: middle;
-    border-style: none
+    border-style: none;
+    cursor: default;
 }

@@ -1,33 +1,53 @@
 (function () {
     'use strict'
-    // wait for visible key elements and return
-    function wfke(selector, callback) {
-        var el = document.querySelector(selector)
-        if (el) return callback()
-        setTimeout(wfke, 100, selector, callback)
-    }
 
+    const delay = ms => new Promise(res => setTimeout(res, ms))
     const tagImgSelector = ".detail-header-image img, .tag-card-header img"
     const bgImgSelector = ".background-image-container img"
 
-    const replaceAll = () => wfke(tagImgSelector, () =>
-        document.querySelectorAll(`${tagImgSelector}, ${bgImgSelector}`)
+    const replaceAll = () => waitForElementBySelector(tagImgSelector, () => {
+        document.querySelectorAll(tagImgSelector)
+            .forEach(img => replace(img, true))
+        document.querySelectorAll(bgImgSelector)
             .forEach(replace)
-    )
+    })
 
-    function replace(img) {
+    const intervalReplaceAll = () => setInterval(replaceAll, 500)
+
+    async function playVideo(evt) {
+        const checkHover = () => (!video.matches(':hover')) ? stopVideo(evt) : true
+        const video = evt.target
+        await delay(100)
+        if (!checkHover()) return
+        video.muted = false
+        video.currentTime = 0
+        video.play()
+            .then(() => setInterval(checkHover, 100))
+            .catch(err => {})
+    }
+
+    function stopVideo(evt) {
+        evt.target.muted = true
+    }
+
+    function replace(img, hover = false) {
         const src = img.getAttribute("src")
         const video = document.createElement("video")
         const propName = ["autoplay", "muted", "loop", "playsinline"]
         propName.forEach(prop => video[prop] = true)
         video.attributes.alt = img.attributes.alt
         video.classList = img.classList
+        video.classList.add("tag-video")
         video.src = src
         video.poster = src
+        if (hover) {
+            video.addEventListener('mouseover', playVideo)
+            video.addEventListener('mouseout', stopVideo)
+        }
         img.replaceWith(video)
     }
-    stash.addEventListener('page:tag', replaceAll)
-    stash.addEventListener('page:tag:any', replaceAll)
+    stash.addEventListener('page:tag', intervalReplaceAll)
+    stash.addEventListener('page:tag:any', intervalReplaceAll)
     stash.addEventListener('page:tags', replaceAll)
     replaceAll()
 })()
