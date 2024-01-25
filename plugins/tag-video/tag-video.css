@@ -13,16 +13,8 @@
     }
 }
 
-#movie-page .detail-header-image .movie-images video {
-    max-width: 13rem
-}
-
 #tag-page .detail-header-image video {
     border-radius: .5rem
-}
-
-#tag-page .full-width .detail-header-image video {
-    max-width: 22rem
 }
 
 #tag-page .detail-header.collapsed .detail-header-image video {
@@ -32,9 +24,19 @@
 #tag-page .detail-header-image video {
     max-width: 20rem
 }
+#tag-page .full-width .detail-header-image video {
+    max-width: 22rem
+}
 
-video.tag-card-image {
-    width: 100%
+#movie-page .detail-header-image .movie-images video {
+    max-width: 13rem
+}
+
+.zoom-0 video.tag-card-image,
+.zoom-1 video.tag-card-image,
+.zoom-2 video.tag-card-image,
+.zoom-3 video.tag-card-image {
+	width: 100%;
 }
 
 video.tag-video {
