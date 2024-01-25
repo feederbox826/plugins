@@ -33,6 +33,10 @@
     max-width: 20rem
 }
 
+video.tag-card-image {
+    width: 100%
+}
+
 video.tag-video {
     vertical-align: middle;
     border-style: none;
