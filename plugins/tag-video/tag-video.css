@@ -32,11 +32,20 @@
     max-width: 13rem
 }
 
-.zoom-0 video.tag-card-image,
-.zoom-1 video.tag-card-image,
-.zoom-2 video.tag-card-image,
-.zoom-3 video.tag-card-image {
-	width: 100%;
+.zoom-0 .tag-card-image {
+	width: 16rem;
+}
+
+.zoom-1 .tag-card-image {
+	width: 20rem;
+}
+
+.zoom-2 .tag-card-image {
+	width: 24rem;
+}
+
+.zoom-3 .tag-card-image {
+	width: 28rem;
 }
 
 video.tag-video {
