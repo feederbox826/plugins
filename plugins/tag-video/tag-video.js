@@ -38,6 +38,7 @@
         video.attributes.alt = img.attributes.alt
         video.classList = img.classList
         video.classList.add("tag-video")
+        video.disableRemotePlayback = true
         video.src = src
         video.poster = src
         if (hover) {
