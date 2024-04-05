@@ -11,6 +11,6 @@
 
 const selector = 'div[role="button"] > span'
 const unhide = () => document.querySelectorAll(selector).forEach(e => e.click())
-a
+
 unhide()
 document.addEventListener("scroll", unhide)
