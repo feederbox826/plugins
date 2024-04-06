@@ -26,9 +26,7 @@
             .catch(err => {})
     }
 
-    function stopVideo(evt) {
-        evt.target.muted = true
-    }
+    const stopVideo = (evt) => evt.target.muted = true
 
     function replace(img, hover = false) {
         const src = img.getAttribute("src")
@@ -47,8 +45,12 @@
         }
         img.replaceWith(video)
     }
-    stash.addEventListener('page:tag', intervalReplaceAll)
-    stash.addEventListener('page:tag:any', intervalReplaceAll)
-    stash.addEventListener('page:tags', replaceAll)
+    const pathSwitcher = (event) => {
+        const path = event.detail.data.location.pathname
+        if (path == "/tags") replaceAll()
+        else if (path.startsWith("/tags")) intervalReplaceAll()
+
+    }
+    PluginApi.Event.addEventListener("stash:location", pathSwitcher)
     replaceAll()
 })()

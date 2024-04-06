@@ -1,37 +1,39 @@
+/* /tag/ID page with fullscreen */
 .detail-header-image video {
-    margin: auto;
-    max-width: 14rem;
-    transition: .5s
+	margin: auto;
+	max-width: 14rem;
+	transition: .5s
 }
 
 @media (max-width: 576px) {
-    .detail-header-image .movie-images video {
-        max-width:100%
-    }
-    #tag-page .detail-header-image video {
-        max-width:100%
-    }
+	.detail-header-image .movie-images video {
+		max-width:100%
+	}
+	#tag-page .detail-header-image video {
+		max-width:100%
+	}
 }
 
 #tag-page .detail-header-image video {
-    border-radius: .5rem
+	border-radius: .5rem
 }
 
 #tag-page .detail-header.collapsed .detail-header-image video {
-    max-width: 18rem
+	max-width: 18rem
 }
 
 #tag-page .detail-header-image video {
-    max-width: 20rem
+	max-width: 20rem
 }
 #tag-page .full-width .detail-header-image video {
-    max-width: 22rem
+	max-width: 22rem
 }
 
 #movie-page .detail-header-image .movie-images video {
-    max-width: 13rem
+	max-width: 13rem
 }
 
+/* grouped tag views /tag and hover preview*/
 .zoom-0 .tag-card-image {
 	width: 16rem;
 }
@@ -48,8 +50,12 @@
 	width: 28rem;
 }
 
+.tag-card.grid-card {
+	width: initial !important;
+}
+
 video.tag-video {
-    vertical-align: middle;
-    border-style: none;
-    cursor: default;
+	vertical-align: middle;
+	border-style: none;
+	cursor: default;
 }

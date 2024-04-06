@@ -2,8 +2,6 @@ name: tag-video
 description: Add <video> support to tag images
 version: 0.1.2
 ui:
-  requires:
-  - StashUserscriptLibrary
   javascript:
   - tag-video.js
   css:

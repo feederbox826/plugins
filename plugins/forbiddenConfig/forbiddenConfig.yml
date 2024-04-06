@@ -1,0 +1,6 @@
+name: forbiddenConfig
+description: exposes the forbidden config value store
+version: 1.0.0
+ui:
+  javascript:
+  - forbiddenConfig.js
