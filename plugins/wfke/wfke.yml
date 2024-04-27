@@ -1,0 +1,6 @@
+name: wfke
+description: wait for key elements
+version: 1.0.0
+ui:
+  javascript:
+  - wfke.js
