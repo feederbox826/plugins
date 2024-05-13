@@ -7,6 +7,11 @@ const gqlListener = new EventTarget()
 
 const interceptors = []
 
+unsafeWindow.fbox826 = {
+  gqlListener,
+  interceptors
+}
+
 const preCheck = (request) =>
   request.headers.get("content-type") == "application/json" &&
   request.endsWith("/graphql")
