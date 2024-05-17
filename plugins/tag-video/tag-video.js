@@ -5,7 +5,7 @@
     const tagImgSelector = ".detail-header-image img, .tag-card-header img"
     const bgImgSelector = ".background-image-container img"
 
-    const replaceAll = () => waitForElementBySelector(tagImgSelector, () => {
+    const replaceAll = () => wfke(tagImgSelector, () => {
         document.querySelectorAll(tagImgSelector)
             .forEach(img => replace(img, true))
         document.querySelectorAll(bgImgSelector)
