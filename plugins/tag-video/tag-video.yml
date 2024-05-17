@@ -3,6 +3,8 @@ description: Add <video> support to tag images
 version: 0.1.3
 # requires: wfke
 ui:
+  requires:
+  - wfke
   javascript:
   - tag-video.js
   css:
