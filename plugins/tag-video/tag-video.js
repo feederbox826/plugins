@@ -2,8 +2,8 @@
     'use strict'
 
     const delay = ms => new Promise(res => setTimeout(res, ms))
-    const tagImgSelector = ".detail-header-image img, .tag-card-header img"
-    const bgImgSelector = ".background-image-container img"
+    const tagImgSelector = ".detail-header-image > img:not([placeholder]), .tag-card-header > img:not([placeholder])"
+    const bgImgSelector = ".background-image-container > img:not([placeholder])"
 
     const replaceAll = () => wfke(tagImgSelector, () => {
         document.querySelectorAll(tagImgSelector)
@@ -44,6 +44,13 @@
             video.addEventListener('mouseout', stopVideo)
         }
         img.replaceWith(video)
+        // add a hidden child img for tag-cropper
+        const imgChild = document.createElement("img")
+        imgChild.src = src
+        imgChild.style.display = "none"
+        imgChild.setAttribute("placeholder", "")
+        imgChild.classList = img.classList
+        video.after(imgChild)
     }
     const pathSwitcher = (event) => {
         const path = event.detail.data.location.pathname
