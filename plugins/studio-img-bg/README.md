@@ -1,0 +1,1 @@
+# adds drop shadows to studio logos for better visibility
