@@ -1,0 +1,17 @@
+.studio-overlay img.image-thumbnail.light,
+img.studio-logo.light,
+.studio-card-header img.studio-card-image.light {
+    filter: drop-shadow(0px 0px 10px black) drop-shadow(0px 0px 10px black)
+}
+
+.studio-overlay img.image-thumbnail.dark,
+img.studio-logo.dark,
+.studio-card-header img.studio-card-image.dark {
+    filter: drop-shadow(0px 0px 10px white) drop-shadow(0px 0px 10px white)
+}
+
+.studio-overlay img.image-thumbnail,
+img.studio-logo,
+.studio-card-header img.studio-card-image {
+    filter: drop-shadow(0px 0px 10px darkgrey) drop-shadow(0px 0px 10px darkgrey)
+}

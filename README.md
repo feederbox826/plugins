@@ -20,13 +20,15 @@ tag-video
 watched-video
 - adds badge and css class to watched videos
 
+studio-img-bg
+- Add drop shadows to studio logos
+
 # Dependency plugins
 forbiddenConfig
 - dependency for pulling plugin settings (and more) through Apollo cache
   - ```js
     const settingValue = forbiddenConfig.getPluginSetting("plugin-name", "setting-name", "fallback")
     ```
-
 
 0gql-intercept
 - adds window.fbox826 instance for

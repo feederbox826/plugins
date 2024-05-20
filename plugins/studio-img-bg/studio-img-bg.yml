@@ -1,0 +1,11 @@
+name: studio-img-bg
+description: Add drop shadows to studio icons
+version: 0.1
+# requires: wfke
+ui:
+  requires:
+  - wfke
+  javascript:
+  - studio-img-bg.js
+  css:
+  - studio-img-bg.css
