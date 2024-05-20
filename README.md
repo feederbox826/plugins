@@ -18,6 +18,12 @@ rebrand
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
 
+0gql-intercept
+- adds good-ol gql interception and filtering to stashapp
+
+watched-video
+- adds badge and css class to watched videos
+
 # Userscripts
 
 [db-noto-color](https://github.com/feederbox826/plugins/raw/main/userscript/db-noto-color.user.js)

@@ -1,0 +1,30 @@
+/* custom styles for the card */
+.scene-card.watched {
+    --placeholder: true;
+}
+/* hide badge when hovered */
+.scene-card:hover .watched-badge,
+.scene-card:focus .watched-badge {
+    display: none;
+}
+/* watched badge container */
+.scene-card.watched .watched-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 0px 0px 10px 0px;
+    height: 7%;
+
+    /* watched badge checkmark */
+    & svg {
+        height: 100%;
+        width: 100%;
+        padding: 25%;
+
+        /* checkmark fill */
+        & path {
+            fill: #0f9960;
+        }
+    }
+}

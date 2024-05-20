@@ -1,0 +1,6 @@
+name: 0gql-intercept
+description: graphQL intercept helper library
+version: 0.0.1
+ui:
+  javascript:
+  - 0gql-intercept.js

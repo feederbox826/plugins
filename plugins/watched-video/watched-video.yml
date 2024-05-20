@@ -1,0 +1,19 @@
+name: watched-video
+description: flags watched videos
+# requires: 0gql-intercept
+# requires: forbiddenConfig
+# requires: wfke
+version: 0.0.1
+ui:
+  requires:
+  - 0gql-intercept
+  - forbiddenConfig
+  - wfke
+  javascript:
+  - watched-video.js
+  css:
+  - watched-video.css
+settings:
+  flagPartialWatch:
+    displayName: Flag partially watched videos
+    type: BOOLEAN
