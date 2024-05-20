@@ -2,12 +2,11 @@
 
 Index URL: `https://feederbox826.github.io/plugins/main/index.yml`
 
+![Adding repository](docs/add-plugins.png)
+
 # Plugins
 deleteFP
 - adds a button to delete fingerprints
-
-forbiddenConfig
-- dependency for pulling plugin settings (and more) through Apollo cache
 
 markergen
 - generate markers once they've been saved
@@ -18,19 +17,18 @@ rebrand
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
 
-0gql-intercept
-- adds good-ol gql interception and filtering to stashapp
-
 watched-video
 - adds badge and css class to watched videos
 
-# Userscripts
+# Dependency plugins
+forbiddenConfig
+- dependency for pulling plugin settings (and more) through Apollo cache
+  - ```js
+    const settingValue = forbiddenConfig.getPluginSetting("plugin-name", "setting-name", "fallback")
+    ```
 
-[db-noto-color](https://github.com/feederbox826/plugins/raw/main/userscript/db-noto-color.user.js)
-- replace emojis with Noto Color Emoji for full support
 
-[stashdb-diff](https://github.com/feederbox826/plugins/raw/main/userscript/stashdb-diff.user.js)
-- adds text diff to stashdb detail change boxes
-
-[twitter-media-unblur](https://github.com/feederbox826/plugins/raw/main/userscript/twitter-media-unblur.user.js)
-- unblurs all twitter media posts as you scroll
+0gql-intercept
+- adds window.fbox826 instance for
+  - GQL filtering (incoming requests)
+  - GQL events
