@@ -43,14 +43,10 @@
             video.addEventListener('mouseover', playVideo)
             video.addEventListener('mouseout', stopVideo)
         }
-        img.replaceWith(video)
-        // add a hidden child img for tag-cropper
-        const imgChild = document.createElement("img")
-        imgChild.src = src
-        imgChild.style.display = "none"
-        imgChild.setAttribute("placeholder", "")
-        imgChild.classList = img.classList
-        video.after(imgChild)
+        // hide image for tag-cropper
+        img.setAttribute("placeholder", "")
+        img.style.display = "none"
+        img.before(video)
     }
     const pathSwitcher = (event) => {
         const path = event.detail.data.location.pathname
