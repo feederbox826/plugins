@@ -1,0 +1,9 @@
+name: stash-omnisearch
+description: search all the things on stash
+version: 0.1.0
+ui:
+  css:
+    - stash-omnisearch.css
+  javascript:
+    - "https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"
+    - stash-omnisearch.js
