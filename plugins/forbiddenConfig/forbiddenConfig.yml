@@ -1,5 +1,5 @@
-name: forbiddenConfig
-description: exposes the forbidden config value store
+name: Forbidden Config
+description: Expose config store to UI plugins
 version: 1.0.0
 ui:
   javascript:

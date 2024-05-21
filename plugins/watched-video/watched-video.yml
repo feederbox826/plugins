@@ -1,5 +1,5 @@
-name: watched-video
-description: flags watched videos
+name: Watched Video Icon
+description: Adds icon and css class to watched videos
 # requires: 0gql-intercept
 # requires: forbiddenConfig
 # requires: wfke
