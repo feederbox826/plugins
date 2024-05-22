@@ -48,12 +48,13 @@
         img.style.display = "none"
         img.before(video)
     }
-    const pathSwitcher = (event) => {
-        const path = event.detail.data.location.pathname
+    const pathSwitcher = (path) => {
         if (path == "/tags") replaceAll()
         else if (path.startsWith("/tags")) intervalReplaceAll()
-
+        else if (path.startsWith("/scenes/")) intervalReplaceAll()
     }
-    PluginApi.Event.addEventListener("stash:location", pathSwitcher)
+    PluginApi.Event.addEventListener("stash:location", (e) => pathSwitcher(e.detail.data.location.pathname))
+    // gql findTag listener
+    pathSwitcher(window.location.pathname)
     replaceAll()
 })()

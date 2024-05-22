@@ -1,6 +1,6 @@
 name: tag-video
 description: Add <video> support to tag images
-version: 0.1.4
+version: 0.1.5
 # requires: wfke
 ui:
   requires:
