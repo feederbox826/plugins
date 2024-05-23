@@ -1,0 +1,9 @@
+name: Average Rating
+description: Adds average rating to performers and studios
+# requires: wfke
+version: 0.1.0
+ui:
+  requires:
+  - wfke
+  javascript:
+  - avg-rating.js
