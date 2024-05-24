@@ -50,7 +50,8 @@ async function addAvgRating() {
         ratingParent.appendChild(ratingTitle)
         const ratingValue = document.createElement("span")
         ratingValue.classList = "detail-item-value avg-rating"
-        ratingValue.innerText = `${rating}%`
+        // If the rating is not a number, return "N/A" instead of a percentage.
+        ratingValue.innerText = Number.isNaN(rating) ? "N/A" : `${rating}%`
         ratingParent.appendChild(ratingValue)
         // append to navbar
         document.querySelector(".detail-group").prepend(ratingParent)
