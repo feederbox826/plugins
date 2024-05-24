@@ -9,6 +9,16 @@ async function addAvgRating() {
             .reduce((acc, rating) => acc + rating, 0) / data.data.findScenes.scenes.length
         ).then(avg => Math.round(avg))
 
+    function fetchMovieRating(id) {
+        // craft query
+        const query = `query FindScenes($movie: ID!) {
+        findScenes( scene_filter: {
+            movies: {value: [$movie], modifier: INCLUDES_ALL }
+            rating100: { modifier: NOT_NULL, value: 0 }}) {
+        scenes { rating100 }}}`
+        // fetch data
+        return fetchAverage(query, { movie: id })
+    }
     function fetchPerformerRating(id) {
         // craft query
         const query = `query FindScenes($performer: ID!) {
@@ -52,12 +62,15 @@ async function addAvgRating() {
         const performerId = window.location.pathname.match(/\/performers\/(\d+)/)
         // look for studio id
         const studioId = window.location.pathname.match(/\/studios\/(\d+)/)
+        // look for movie id
+        const movieId = window.location.pathname.match(/\/movies\/(\d+)/)
         // set rating
         if (performerId) fetchPerformerRating(performerId[1]).then(rating => setRatingElement(rating))
         else if (studioId) fetchStudioRating(studioId[1]).then(rating => setRatingElement(rating))
+        else if (movieId) fetchMovieRating(movieId[1]).then(rating => setRatingElement(rating))
     }
     // change observer
     PluginApi.Event.addEventListener("stash:location", () => setRating())
-    wfke("#studio-page, #performer-page", setRating)
+    wfke("#studio-page, #performer-page", "#movie-page", setRating)
 }
 addAvgRating()
