@@ -1,0 +1,6 @@
+name: tag-graph-js
+description: Interactive tag graph with d3.js
+version: 0.1
+ui:
+  assets:
+    /: .

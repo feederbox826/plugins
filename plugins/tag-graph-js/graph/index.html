@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  .links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+  }
+
+  .nodes circle {
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+  #graph {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+  }
+  svg {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+<div id="graph"></div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="./d3graph.js"></script>
+<script src="./parse.js"></script>
+<script>
+  parseTags()
+    .then(data => draw(data))
+</script>
