@@ -1,4 +1,6 @@
 #!/bin/bash
+# AGPLv3.0
+# https://github.com/stashapp/CommunityScripts/blob/main/LICENSE
 
 # builds a repository of scrapers
 # outputs to _site with the following structure:
