@@ -1,0 +1,11 @@
+name: tag-filter
+description: Filter out and hide specific tags
+version: 0.1
+# requires: 0gql-intercept
+# requires: wfke
+ui:
+  requires:
+  - 0gql-intercept
+  - wfke
+  javascript:
+  - tag-filter.js
