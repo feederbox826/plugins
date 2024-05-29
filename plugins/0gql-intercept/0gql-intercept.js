@@ -18,13 +18,15 @@ function main() {
     response.headers.get("Content-Type") == "application/json" &&
     response.url.endsWith("/graphql")
 
-  const responseInterceptor = async (response) => {
+  const responseInterceptor = async (response, request) => {
     // skip if not ok or not a graphql request
     if (!response.ok || !preCheck(response)) return response
     // get response data
     let data = await response.clone().json()
+    // parse request data
+    const query = request.body && JSON.parse(request.body)
     // run interceptors
-    for (const interceptor of interceptors) data = await interceptor(data)
+    for (const interceptor of interceptors) data = await interceptor(data, query)
     // trigger response event
     gqlListener.dispatchEvent(new CustomEvent("response", { detail: data }))
     // return response
@@ -40,7 +42,7 @@ function main() {
     // request interceptor here
     const response = await originalFetch(request, config)
     // response interceptor
-    try { return await responseInterceptor(response) }
+    try { return await responseInterceptor(response, config) }
     catch (e) { return response }
   }
 }
