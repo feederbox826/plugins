@@ -59,7 +59,8 @@ function tagFilterUI() {
         parent.append(label)
         // pre-check if tag is in list
         checkbox.checked = refreshTags().includes(tagid)
-        document.querySelector("#tag-page .studio-head.col").append(parent)
+        // remove `.studio-head.col` for v25 release
+        document.querySelector("#tag-page .studio-head.col, #tag-page .tag-head.col").append(parent)
     }
 
     PluginApi.Event.addEventListener("stash:location", (e) => {
