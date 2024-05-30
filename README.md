@@ -24,6 +24,10 @@ stash-omnisearch
 studio-img-bg
 - Add drop shadows to studio logos
 
+tag-filter
+- Marks tags as "Meta-Tags"
+- Filters out tags from select menus
+
 tag-graph-js
 - Tag graph visualization with d3.js
 - [stg-annon/tagGraph](https://github.com/stg-annon/StashScripts/tree/main/plugins/tagGraph) is recommended in lieu of this plugin
@@ -45,3 +49,6 @@ forbiddenConfig
 - adds window.fbox826 instance for
   - GQL filtering (incoming requests)
   - GQL events
+
+fontawesome-js
+- adds support for `<i>` style fontawesome icons with vanilla JS

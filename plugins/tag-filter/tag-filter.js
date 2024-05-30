@@ -29,12 +29,24 @@ window.fbox826.interceptors.push(tagSearchInterceptor)
 
 // add tag UI
 function tagFilterUI() {
-    const addButton = () => wfke("#tag-page .detail-container", addToggle)
+    const waitAdd = () => {
+        wfke("#tag-edit", addToggle)
+        wfke("#tag-page", addIcon)
+    }
     const toggleTag = (tagid, state) => {
         const metatags = refreshTags()
         state ? metatags.push(tagid)
             : metatags.splice(metatags.indexOf(tagid), 1)
         localStorage.setItem("tag-filter-metatags", JSON.stringify(metatags))
+    }
+
+    function addIcon() {
+        if (document.querySelector(".tag-filter-icon")) return
+        const tagid = (new URL(document.URL).pathname).split("/")[2]
+        if (!refreshTags().includes(tagid)) return
+        const icon = document.createElement("i")
+        icon.classList = "fa-solid fa-brain tag-filter-icon"
+        document.querySelector(".name-icons").appendChild(icon)
     }
 
     function addToggle() {
@@ -59,14 +71,13 @@ function tagFilterUI() {
         parent.append(label)
         // pre-check if tag is in list
         checkbox.checked = refreshTags().includes(tagid)
-        // remove `.studio-head.col` for v25 release
-        document.querySelector("#tag-page .studio-head.col, #tag-page .tag-head.col").append(parent)
+        document.querySelector("#tag-edit").appendChild(parent)
     }
 
     PluginApi.Event.addEventListener("stash:location", (e) => {
-        if (e.detail.data.location.pathname.startsWith("/tags")) addButton()
+        if (e.detail.data.location.pathname.startsWith("/tags")) waitAdd()
     })
     // gql findTag listener
-    addButton()
+    waitAdd()
 }
 tagFilterUI()
