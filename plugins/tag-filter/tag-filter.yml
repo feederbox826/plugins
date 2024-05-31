@@ -1,13 +1,19 @@
 name: tag-filter
-description: Filter out and hide specific tags
-version: 0.1.2
+description: Filter out and hide meta-tags
+version: 0.2.0
 # requires: 0gql-intercept
+# requires: forbiddenConfig
 # requires: wfke
 # requires: fontawesome-js
 ui:
   requires:
   - 0gql-intercept
+  - forbiddenConfig
   - wfke
   - fontawesome-js
   javascript:
   - tag-filter.js
+settings:
+  hideScrape:
+    displayName: Hide meta-tags from scraping
+    type: BOOLEAN

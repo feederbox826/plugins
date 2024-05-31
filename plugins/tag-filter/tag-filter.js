@@ -1,31 +1,43 @@
 // load metatags for gql intercept
 const refreshTags = () => JSON.parse(localStorage.getItem("tag-filter-metatags")) || []
-const metatags = refreshTags()
 
 // add graphql intercept
 const tagSearchInterceptor = async (data, query) => {
+    const metatags = refreshTags()
     // check that we are doing findTags query
     if (!data?.data?.findTags) return data
     // check our request
     if (query?.operationName !== "FindTagsForSelect") return data
     // keep track of count for modifying
-    const removedCount = 0
     // filter out tags in our meta-tag list
-    const newTagList = data.data.findTags.tags.filter(tag => {
-        if (metatags.includes(tag.id)) {
-            removedCount++
-            return false
-        }
-        return true
-    })
-    // modify responses
+    const newTagList = data.data.findTags.tags.filter(tag => !metatags.includes(tag.id))
+    const newLength = newTagList.length
+    // modify tags and count
     data.data.findTags.tags = newTagList
-    // modify count
-    data.data.findTags.count -= removedCount
+    data.data.findTags.count = newLength
+    return data
+}
+
+const filterSceneTags = (scene) => {
+    const metatags = refreshTags()
+    scene.tags = scene.tags.filter(tag => !metatags.includes(tag.stored_id))
+    return scene
+}
+
+// add scraper intercept
+const scraperIntercept = async (data, query) => {
+    const hideScrape = forbiddenConfig.getPluginSetting("tag-filter", "hideScrape", false)
+    if (!hideScrape) return data
+    // filter requests
+    const scrapeType = Object.keys(data.data)[0]
+    if (!["scrapeSingleScene", "scrapeMultiScenes"].includes(scrapeType)) return data
+    const newScenes = data.data[scrapeType].map(scene => filterSceneTags(scene))
+    data.data[scrapeType] = newScenes
     return data
 }
 
 window.fbox826.interceptors.push(tagSearchInterceptor)
+window.fbox826.interceptors.push(scraperIntercept)
 
 // add tag UI
 function tagFilterUI() {
