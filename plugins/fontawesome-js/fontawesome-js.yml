@@ -1,6 +1,6 @@
 name: fontawesome-js
 description: Use fontawesome icons from React libraries
-version: 0.1
+version: 0.1.1
 ui:
   javascript:
   - fontawesome-js.js

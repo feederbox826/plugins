@@ -3,12 +3,14 @@ description: Adds icon and css class to watched videos
 # requires: 0gql-intercept
 # requires: forbiddenConfig
 # requires: wfke
-version: 0.0.1
+# requires: fontawesome-js
+version: 0.1.0
 ui:
   requires:
   - 0gql-intercept
   - forbiddenConfig
   - wfke
+  - fontawesome-js
   javascript:
   - watched-video.js
   css:

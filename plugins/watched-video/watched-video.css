@@ -15,12 +15,16 @@
     background-color: rgba(0,0,0,0.8);
     border-radius: 0px 0px 10px 0px;
     height: 7%;
+    width: 8%;
+    z-index: 1;
 
     /* watched badge checkmark */
     & svg {
         height: 100%;
-        width: 100%;
         padding: 25%;
+        margin: 0;
+        overflow: hidden;
+        box-sizing: border-box;
 
         /* checkmark fill */
         & path {

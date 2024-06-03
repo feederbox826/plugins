@@ -36,7 +36,7 @@ const searcher = () => {
         // create svg
         const svg = createSVG(library, name, icon)
         // replace if valid
-        if (svg) refreshTags()
+        if (svg) icon.replaceWith(svg)
     })
 }
 
