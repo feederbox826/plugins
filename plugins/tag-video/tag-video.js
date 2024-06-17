@@ -6,6 +6,7 @@
     const bgImgSelector = ".background-image-container > img:not([placeholder])"
 
     const replaceAll = () => wfke(tagImgSelector, () => {
+        if (window.location.pathname.startsWith("/studios/")) return
         document.querySelectorAll(tagImgSelector)
             .forEach(img => replace(img, true))
         document.querySelectorAll(bgImgSelector)
@@ -52,6 +53,7 @@
         if (path == "/tags") replaceAll()
         else if (path.startsWith("/tags")) intervalReplaceAll()
         else if (path.startsWith("/scenes/")) intervalReplaceAll()
+        else if (path.startsWith("/studios")) return
     }
     PluginApi.Event.addEventListener("stash:location", (e) => pathSwitcher(e.detail.data.location.pathname))
     // gql findTag listener
