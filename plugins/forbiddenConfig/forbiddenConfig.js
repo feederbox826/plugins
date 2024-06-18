@@ -8,7 +8,7 @@ const forbiddenConfig = {
     // plugin settings dictionary
     pluginSettings: root.configuration.plugins,
     // get plugin settings
-    getPluginSetting: (pluginName, settingName, fallback) => root.configuration.plugins[pluginName][settingName] ?? fallback,
+    getPluginSetting: (pluginName, settingName, fallback) => root.configuration.plugins?.[pluginName]?.[settingName] ?? fallback,
     // graphQL apikey
     gqlKey: root.configuration.general.apiKey
 }
