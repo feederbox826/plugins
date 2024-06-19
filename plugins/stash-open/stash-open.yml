@@ -1,0 +1,23 @@
+name: stash-open
+description: Opens media files in local media player
+version: 0.1
+# requires: wfke
+# requires: forbiddenConfig
+ui:
+  requires:
+  - wfke
+  javascript:
+  - stash-open.js
+  - https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js
+  css:
+  - https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css
+  csp:
+    connect-src:
+      - "http://localhost:19999"
+settings:
+  pathreplace:
+    displayName: "path replacement in the format of oldpath,newpath seperated by spaces"
+    type: STRING
+  stashurl:
+    displayName: "URL used to access stash (http://my-nas.example/stash)"
+    type: STRING
