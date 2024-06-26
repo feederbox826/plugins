@@ -1,9 +1,11 @@
 name: skip-intro
 description: Skips static duration intros
 # requires: 0gql-intercept
+# requires: stashdb-api
 version: 0.0.1
 ui:
   requires:
+    - stashdb-api
     - 0gql-intercept
   javascript:
   - https://feederbox826.github.io/stash-skip-intro/intros.js
