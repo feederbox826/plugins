@@ -1,0 +1,12 @@
+name: stashdb-api
+description: StashDB API client
+version: 0.1
+# requires: CommunityScriptsUILibrary
+ui:
+  requires:
+    - CommunityScriptsUILibrary
+  javascript:
+    - stashdb-api.js
+  csp:
+    connect-src:
+      - "https://stashdb.org/graphql"
