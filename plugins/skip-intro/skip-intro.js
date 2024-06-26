@@ -2,9 +2,9 @@
 const introMap = new Map(Object.entries(intros));
 
 // hook into video element for skipping
-const hookVideo = (endTime) => wfke("video", () => {
+const hookVideo = (endTime) => wfke("video-js>video", () => {
   // find video
-  const video = document.querySelector("video");
+  const video = document.querySelector("video-js>video");
   const seekVideo = (e) => {
     const startTime = video.currentTime; // freeze time for evaluation
     if (startTime == 0) video.currentTime = endTime;
