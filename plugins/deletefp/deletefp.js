@@ -22,7 +22,7 @@
     }
   }
 
-  stash.addEventListener('tagger:mutations:header', evt => {
+  stash7dJx1qP.addEventListener('tagger:mutations:header', () => {
     waitForElementByXpath(submitSelector, setupDeleteButton)
   });
   const hideSubmitFPButton = () => {

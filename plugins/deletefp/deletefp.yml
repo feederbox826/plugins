@@ -1,9 +1,9 @@
 name: deletefp
 description: Adds a button to delete fingerprints
-# requires: StashUserscriptLibrary
-version: 0.0.1
+# requires: stashUserscriptLibrary7dJx1qP
+version: 0.1.0
 ui:
   requires:
-  - StashUserscriptLibrary
+  - stashUserscriptLibrary7dJx1qP
   javascript:
   - deletefp.js
