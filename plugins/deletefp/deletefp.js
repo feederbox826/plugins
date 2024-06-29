@@ -1,6 +1,12 @@
 (function () {
   'use strict';
 
+const {
+    stash,
+    waitForElementByXpath,
+    getElementByXpath,
+} = window.stash7dJx1qP;
+
   const btnId = 'delete-fp';
   const btn = document.createElement("button");
   btn.setAttribute("id", btnId);
@@ -22,7 +28,7 @@
     }
   }
 
-  stash7dJx1qP.addEventListener('tagger:mutations:header', () => {
+  stash.addEventListener('tagger:mutations:header', () => {
     waitForElementByXpath(submitSelector, setupDeleteButton)
   });
   const hideSubmitFPButton = () => {
