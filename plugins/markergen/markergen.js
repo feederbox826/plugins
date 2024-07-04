@@ -5,11 +5,11 @@ function ok() {
 }
 
 function main() {
+    log.Debug("Running markergen plugin");
     var hookContext = input.Args.hookContext;
     var type = hookContext.type;
-    var ID = hookContext.ID;
 
-    if (!type || !ID) {
+    if (!type) {
         // just return
         return ok();
     }
