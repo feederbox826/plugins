@@ -1,0 +1,18 @@
+name: edit-unorganized
+description: Default to edit tab on unorganized scenes
+# requires: CommunityScriptsUILibrary
+# requires: wfke
+version: 0.1.0
+settings:
+  organized:
+    displayName: Open tab even if scene is organized
+    type: BOOLEAN
+  targetTab:
+    displayName: Name of the tab to open [details, queue, markers, filters, file-info, history, edit]
+    type: STRING
+ui:
+  requires:
+  - CommunityScriptsUILibrary
+  - wfke
+  javascript:
+  - edit-unorganized.js
