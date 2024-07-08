@@ -11,15 +11,24 @@ avg-rating
 deleteFP
 - adds a button to delete fingerprints
 
+edit-unorganized
+- Jumps to a chosen tab when an unorganized (or organized) scene is opened
+
 markergen
 - generate markers once they've been saved
 
 rebrand
 - add a custom name instead of "Stash" to identify your instance(s)
 
+skip-intro
+- skips intros of studios in the [database](https://github.com/feederbox826/stash-skip-intro)
+
 stash-omnisearch
 - fork of [stash-omnisearch](https://github.com/hozaywut/stash-omnisearch) for v24+
 - Licenced ISC
+
+stash-open
+- plugin component of [StashOpen](https://github.com/feederbox826/StashOpen) to allow for local video playback
 
 studio-img-bg
 - Add drop shadows to studio logos
@@ -39,12 +48,6 @@ watched-video
 - adds badge and css class to watched videos
 
 # Dependency plugins
-forbiddenConfig
-- dependency for pulling plugin settings (and more) through Apollo cache
-  - ```js
-    const settingValue = forbiddenConfig.getPluginSetting("plugin-name", "setting-name", "fallback")
-    ```
-
 0gql-intercept
 - adds window.fbox826 instance for
   - GQL filtering (incoming requests)
@@ -52,3 +55,15 @@ forbiddenConfig
 
 fontawesome-js
 - adds support for `<i>` style fontawesome icons with vanilla JS
+
+forbiddenConfig
+- dependency for pulling plugin settings (and more) through Apollo cache
+  - ```js
+    const settingValue = forbiddenConfig.getPluginSetting("plugin-name", "setting-name", "fallback")
+    ```
+
+stashdb-api
+- stashdb fetch client set up with ApiKey pre-loaded
+
+wfke
+- runs a function when a element matching `document.querySelector()` is found
