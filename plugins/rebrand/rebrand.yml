@@ -2,7 +2,7 @@ name: Rebrand
 description: Adds a name override of your choice in Stash
 # requires: forbiddenConfig
 # requires: wfke
-version: 0.1.1
+version: 0.3.0
 ui:
   requires:
   - forbiddenConfig

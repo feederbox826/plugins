@@ -1,0 +1,6 @@
+name: titleobserver
+description: Adds an event listener for title changes
+version: 0.1
+ui:
+  javascript:
+  - titleobserver.js

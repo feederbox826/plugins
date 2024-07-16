@@ -65,5 +65,8 @@ forbiddenConfig
 stashdb-api
 - stashdb fetch client set up with ApiKey pre-loaded
 
+titleobserver
+- adds an event listener for title changes
+
 wfke
 - runs a function when a element matching `document.querySelector()` is found
