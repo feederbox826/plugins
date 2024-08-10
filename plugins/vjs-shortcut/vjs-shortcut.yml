@@ -1,0 +1,9 @@
+name: vjs-shortcut
+description: Add YouTube keyboard shortcuts to VideoJS
+version: 0.1
+# requires: wfke
+ui:
+  requires:
+  - wfke
+  javascript:
+  - vjs-shortcut.js

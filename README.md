@@ -47,6 +47,9 @@ tag-video
 watched-video
 - adds badge and css class to watched videos
 
+vjs-shortcut
+- Adds (most) [YouTube](https://support.google.com/youtube/answer/7631406) keyboard shortcuts to VideoJS
+
 # Dependency plugins
 0gql-intercept
 - adds window.fbox826 instance for
