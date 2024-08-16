@@ -30,6 +30,9 @@ stash-omnisearch
 stash-open
 - plugin component of [StashOpen](https://github.com/feederbox826/StashOpen) to allow for local video playback
 
+stashdb-fullimg
+- Adds full-size image download from StashDB
+
 studio-img-bg
 - Add drop shadows to studio logos
 
