@@ -17,17 +17,31 @@ function addRes(img) {
     img.parentElement.style.position = "relative"
 }
 
-const commonHeight = (width, height) =>
-    height == 8640 && width == 15360 ? "16K"
-    : height == 4320 && width == 7680 ? "8K"
-    : height == 2160 && width == 3840 ? "4K"
-    : height == 1800 && width == 3200 ? "1800p"
-    : height == 1440 && width == 2560 ? "1440p"
-    : height == 1080 && width == 1920 ? "1080p"
-    : height == 720 && width == 1280 ? "720p"
-    : height == 540 && width == 960 ? "540p"
-    : height == 480 && width == 720 ? "480p"
-    : `${width} x ${height}`
+const commonRes = {
+    "16K": [15360, 8640],
+    "8K": [7680, 4320],
+    "4K": [3840, 2160],
+    "1800p": [3200, 1800],
+    "1440p": [2560, 1440],
+    "1080p": [1920, 1080],
+    "900p": [1600, 900],
+    "720p": [1280, 720],
+    "540p": [960, 540],
+    "480p": [720, 480],
+    "480p": [640, 480]
+}
+
+const commonHeight = (width, height) => {
+    const THRESHOLD = 30
+    for (const [res, [w, h]] of Object.entries(commonRes)) {
+        // within +-THRESHOLD px
+        if (width > (w-THRESHOLD) && width < (w+THRESHOLD)
+            && height > (h-THRESHOLD) && height < (h+THRESHOLD)) {
+          return res
+        }
+    }
+    return `${width} x ${height}`
+}
 
 const colorScale = (height) =>
     // amazing
@@ -40,7 +54,7 @@ const colorScale = (height) =>
         : height >= 1800 ? ["#008115", "#eee"]
         : height >= 1440 ? ["#00b155", "#111"]
         // above avg
-        : height >= 1080 ? ["#8fd259", "#111"]
+        : height >= 900 ? ["#8fd259", "#111"]
         // average
         : height >= 720 ? ["#dde12e", "#111"]
         // bad
