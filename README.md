@@ -47,6 +47,9 @@ tag-graph-js
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
 
+tagger-img-res
+- adds resolution indicators to tagger view
+
 watched-video
 - adds badge and css class to watched videos
 

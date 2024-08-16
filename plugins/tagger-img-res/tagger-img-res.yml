@@ -1,0 +1,8 @@
+name: tagger-img-res
+description: Adds resolutions to all tagger images
+version: 0.1.0
+ui:
+  javascript:
+    - tagger-img-res.js
+  css:
+    - tagger-img-res.css
