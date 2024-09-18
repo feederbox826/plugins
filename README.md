@@ -53,6 +53,9 @@ tagger-img-res
 watched-video
 - adds badge and css class to watched videos
 
+vjs-mmb-shortcut
+- Middle Mouse Button for fullscreen toggle
+
 vjs-shortcut
 - Adds (most) [YouTube](https://support.google.com/youtube/answer/7631406) keyboard shortcuts to VideoJS
 
