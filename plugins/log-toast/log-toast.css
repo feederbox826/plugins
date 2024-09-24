@@ -1,8 +1,10 @@
 .toast-box {
-  color: #000
+  color: #000;
+  box-shadow: none;
 }
 .toast-error {
   background: red;
+  color: #fff
 }
 .toast-warning {
   background: #ffa500;
