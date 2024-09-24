@@ -14,6 +14,9 @@ deleteFP
 edit-unorganized
 - Jumps to a chosen tab when an unorganized (or organized) scene is opened
 
+log-toast
+- pop up log messages as toasts
+
 markergen
 - generate markers once they've been saved
 

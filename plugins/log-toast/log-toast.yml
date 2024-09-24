@@ -1,0 +1,11 @@
+name: log-toast
+description: display log messages as toasts
+version: 1.0.0
+ui:
+  javascript:
+  - https://cdn.jsdelivr.net/npm/graphql-ws@5/umd/graphql-ws.min.js
+  - https://cdn.jsdelivr.net/npm/toastify-js@1/src/toastify.min.js
+  - log-toast.js
+  css:
+  - https://cdn.jsdelivr.net/npm/toastify-js@1/src/toastify.min.css
+  - log-toast.css

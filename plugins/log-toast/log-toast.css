@@ -1,0 +1,18 @@
+.toast-box {
+  color: #000
+}
+.toast-error {
+  background: red;
+}
+.toast-warning {
+  background: #ffa500;
+}
+.toast-info, .toast-trace {
+  background: #fff;
+}
+.toast-debug {
+  background: #90ee90;
+}
+.toast-internal {
+  background: #cfecf7;
+}
