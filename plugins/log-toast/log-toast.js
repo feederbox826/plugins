@@ -29,22 +29,24 @@ async function toastLogs() {
   const subscription = client.iterate({ query: "subscription { loggingSubscribe { level message }}" });
   intToast("Subscribed to logs");
   for await (const event of subscription) {
-    let debugLogs = [];
+    // aggregate logs together
+    const aggLogs = {
+      "debug": [],
+      "info": [],
+      "warning": [],
+      "error": []
+    }
     for (const log of event.data.loggingSubscribe) {
       const level = log.level.toLowerCase()
-      switch (level) {
-        case 'trace': // if trace, ignore
-          continue;
-        case 'debug': // if debug, add to array
-          debugLogs.push(log.message);
-          break;
-        default: // print other logs individually
-          toast(log.message, level)
-          break;
-      }
+      if (level == "trace") continue
+      // aggregate and print logs together
+      aggLogs[level].push(log.message)
     }
-    // print debug logs together
-    if (debugLogs.length) toast(debugLogs.join("\n"), "debug");
+    for (const level of Object.keys(aggLogs)) {
+      const logs = aggLogs[level]
+      if (!logs.length) continue
+      toast(logs.join("\n"), level)
+    }
   }
   intToast("Subscription ended");
 }
