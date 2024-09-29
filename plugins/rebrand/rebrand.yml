@@ -2,7 +2,7 @@ name: Rebrand
 description: Adds a name override of your choice in Stash
 # requires: forbiddenConfig
 # requires: wfke
-version: 0.3.0
+version: 0.4.0
 ui:
   requires:
   - forbiddenConfig
@@ -12,4 +12,7 @@ ui:
 settings:
   name:
     displayName: Instance Name
+    type: STRING
+  favicon:
+    displayName: Favicon Replacement URL
     type: STRING

@@ -22,6 +22,7 @@ markergen
 
 rebrand
 - add a custom name instead of "Stash" to identify your instance(s)
+- add a custom favicon
 
 skip-intro
 - skips intros of studios in the [database](https://github.com/feederbox826/stash-skip-intro)
