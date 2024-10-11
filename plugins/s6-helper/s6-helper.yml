@@ -1,0 +1,12 @@
+name: stash-s6 helper
+description: stash-s6 helper plugin
+version: 0.1.0
+exec:
+  - python
+  - "{pluginDir}/s6-helper.py"
+interface: raw
+tasks:
+  - name: Python reinstall
+    description: Install all python dependencies
+    defaultArgs:
+      mode: install
