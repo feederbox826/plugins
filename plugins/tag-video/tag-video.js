@@ -59,4 +59,7 @@
     // gql findTag listener
     pathSwitcher(window.location.pathname)
     replaceAll()
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) document.querySelectorAll(".tag-video").forEach(video => video.muted = true)
+    })
 })()
