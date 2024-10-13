@@ -48,6 +48,9 @@ tag-graph-js
 - Tag graph visualization with d3.js
 - [stg-annon/tagGraph](https://github.com/stg-annon/StashScripts/tree/main/plugins/tagGraph) is recommended in lieu of this plugin
 
+tag-import
+- import tags from https://tags.feederbox.cc
+
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
 
@@ -86,3 +89,7 @@ titleobserver
 
 wfke
 - runs a function when a element matching `document.querySelector()` is found
+
+# other plugins
+s6-helper
+- [stash-s6](https://github.com/feederbox826/stash-s6) plugin installer

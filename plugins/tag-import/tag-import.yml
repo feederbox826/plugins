@@ -1,0 +1,27 @@
+name: tag-import
+description: feederbox opinionated tag import
+version: 0.0.1
+exec:
+  - python
+  - "{pluginDir}/tag-import.py"
+interface: raw
+tasks:
+  - name: Get Tags
+    description: Replace default tags with available tag videos/images
+    defaultArgs:
+      mode: get
+  - name: Refresh Tags
+    description: Update [fbox-tag] tags if new media is available
+    defaultArgs:
+      mode: refresh
+  - name: Recreate Tags
+    description: Update tags to reflect video/images selection
+    defaultArgs:
+      mode: force
+settings:
+  video-tags:
+    displayName: Download video tags (for use with tag-video) intead of images
+    type: BOOLEAN
+  create-missing:
+    displayName: Create missing tags that have media available (DISABLED)
+    type: BOOLEAN
