@@ -18,7 +18,7 @@
     async function playVideo(evt) {
         const checkHover = () => (!video.matches(':hover')) ? stopVideo(evt) : true
         const video = evt.target
-        await delay(100)
+        await delay(500)
         if (!checkHover()) return
         video.muted = false
         video.currentTime = 0
@@ -60,6 +60,16 @@
     pathSwitcher(window.location.pathname)
     replaceAll()
     document.addEventListener("visibilitychange", () => {
-        if (document.hidden) document.querySelectorAll(".tag-video").forEach(video => video.muted = true)
+        const allVideos = document.querySelectorAll(".tag-video")
+        if (document.hidden) {
+            allVideos.forEach(video => video.muted = true)
+            // setTimeout to auto-stop videos after 2s of hidden
+            setTimeout(() => { if (document.hidden) allVideos.forEach(video => video.pause()) }, 200)
+        } else {
+            allVideos.forEach(video => {
+                const startInt = Math.floor(Math.random() * 200 * allVideos.length)
+                setTimeout(() => video.play(), startInt)
+            })
+        }
     })
 })()
