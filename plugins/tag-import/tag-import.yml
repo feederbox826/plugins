@@ -1,6 +1,6 @@
 name: tag-import
 description: feederbox opinionated tag import
-version: 0.0.1
+version: 0.1.0
 exec:
   - python
   - "{pluginDir}/tag-import.py"
@@ -23,5 +23,5 @@ settings:
     displayName: Download video tags (for use with tag-video) intead of images
     type: BOOLEAN
   create-missing:
-    displayName: Create missing tags that have media available (DISABLED)
+    displayName: Create missing tags that have media available
     type: BOOLEAN

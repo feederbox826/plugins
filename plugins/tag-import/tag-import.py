@@ -23,7 +23,7 @@ DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER = False;
 tagserv_s = requests.Session()
 
 # helpers
-def getStashTags(filter={"per_page": -1}):
+def getStashTags():
   tags = stash.find_tags(fragment="id name aliases image_path parents { id }")
   return tags
 
@@ -74,7 +74,6 @@ def updateTag(tagid, filename):
 # main function
 
 def syncTags():
-  log.debug(REFRESH)
   # precheck
   if DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER:
     log.error("DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER is enabled, please contact me for fullsize archives")
@@ -86,6 +85,9 @@ def syncTags():
     for PREFIX in EXCLUDE_PREFIX:
       if name.startswith(PREFIX):
         continue
+    # skip flagged as ignored
+    if media.get("ignore") == True:
+      continue
     # search in local tags, optionally create
     localTag = stash.find_tag(name, create=CREATE_MISSING_TAGS)
     # if not found, skip
@@ -125,7 +127,6 @@ def syncTags():
   log.info("tag sync complete")
 
 # tasks
-
 json_input = json.loads(sys.stdin.read())
 FRAGMENT_SERVER = json_input["server_connection"]
 stash = StashInterface(FRAGMENT_SERVER)
@@ -137,7 +138,7 @@ config = stash.get_configuration()
 settings = config["plugins"]["tag-import"]
 if (settings):
   DOWNLOAD_VIDEO_TAGS = settings.get('video-tags', False)
-  #CREATE_MISSING_TAGS = settings.get('create-missing', False)
+  CREATE_MISSING_TAGS = settings.get('create-missing', False)
 
 if 'mode' in json_input['args']:
   PLUGIN_ARGS = json_input['args']["mode"]

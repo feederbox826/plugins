@@ -7,10 +7,6 @@ Video tags are intended for use with the [tag-video](https://github.com/feederbo
 
 Some custom tag images exist, but if one is not available, the auto-generated thumbnail of the video will be used instead.
 ### Create Missing Tags
-
-> [!WARNING]
-> This is currently disabled as some tags that do not reflect the StashDB equivalent are included. Once this is fixed, this option will be re-enabled.
-
 Optionally create missing tags if they have media available
 
 ## Tasks
