@@ -1,6 +1,6 @@
 name: tag-import
 description: feederbox opinionated tag import
-version: 0.1.0
+version: 0.1.1
 exec:
   - python
   - "{pluginDir}/tag-import.py"

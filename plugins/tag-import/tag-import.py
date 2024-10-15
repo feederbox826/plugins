@@ -40,8 +40,6 @@ def processFilename(media):
   elif (hasImg):
     if (DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER):
       return f"/media/original/{media['img']}";
-    elif (media["img"].endswith(".webp")):
-      return f"/media/thumbs/{jpgStrip(media['img'])}";
     else:
       return f"/media/thumbs/{media['img']}";
   # only video, grab thumb
