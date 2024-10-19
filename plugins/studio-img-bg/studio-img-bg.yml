@@ -1,6 +1,6 @@
 name: Studio background shadow
 description: Add drop shadows to studio icons for visibility
-version: 0.1
+version: 0.1.1
 # requires: wfke
 ui:
   requires:
