@@ -1,0 +1,7 @@
+name: log-console
+description: display log messages in console
+version: 1.0
+ui:
+  javascript:
+  - https://cdn.jsdelivr.net/npm/graphql-ws@5/umd/graphql-ws.min.js
+  - log-console.js
