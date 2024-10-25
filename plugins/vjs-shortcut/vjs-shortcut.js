@@ -11,6 +11,7 @@ c - activate/ deactivate captions
 
 // declarations
 let video, player, framestep;
+let markers = [];
 
 wfke("video-js", init);
 
@@ -24,6 +25,14 @@ const toggleCaptions = () => {
   const track = player.textTracks().tracks[0];
   track.mode = track.mode == "showing" ? "hidden" : "showing";
 };
+
+const navMarker = (next = true) => {
+  const curTime = video.currentTime;
+  const marker = next
+    ? markers.find(marker => marker > curTime)
+    : markers.reverse().find(marker => marker < curTime-5)
+  if (marker) video.currentTime = marker;
+}
 
 const changePbRate = (increase = true) => {
   // fetch playback rates
@@ -63,6 +72,9 @@ function handleKey(evt) {
     video.currentTime -= framestep;
     evt.preventDefault();
   }
+  // Ctrl + ], [ - Jump to next/previous marker
+  else if (key == "]" && evt.ctrlKey && markers.length ) navMarker(true);
+  else if (key == "[" && evt.ctrlKey && markers.length) navMarker(false);
   // slow down playback rate
   else if (key == "<") changePbRate(false);
   // speed up playback rate
@@ -82,4 +94,6 @@ function init() {
   player.on("keydown", handleKey);
   // once scene info is loaded, get framerate
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
+  // parse markers
+  markers = player.markers().markers.map(marker => marker.time);
 }
