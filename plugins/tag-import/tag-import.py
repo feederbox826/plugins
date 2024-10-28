@@ -42,9 +42,9 @@ def processFilename(media):
       return f"/media/original/{media['img']}";
     else:
       return f"/media/thumbs/{media['img']}";
-  # only video, grab thumb
+  # only video, grab thumb of vid
   else:
-    return f"/media/thumbs/{jpgStrip(media['img'])}";
+    return f"/media/thumbs/{jpgStrip(media['vid'])}";
 
 def url_b64(filename):
   data = base64.b64encode(tagserv_s.get(BASEURL+filename).content)
