@@ -1,10 +1,22 @@
 // add graphql intercept
 const fullImgInt = async (data, query) => {
-    // check that we are doing ScrapeSingleScene query
-    if (!data?.data?.scrapeSingleScene || query?.operationName !== "ScrapeSingleScene") return data
-    // inject high-res link
-    const cdnURL = await createCDNUrl(data.data.scrapeSingleScene[0].remote_site_id)
-    data.data.scrapeSingleScene[0].image = cdnURL
+    // check operations
+    if (query?.operationName !== "ScrapeSingleScene" && query?.operationName !== "ScrapeMultiScenes") return data
+    // single injection
+    if (data.data?.scrapeSingleScene) {
+        // inject high-res link
+        const cdnURL = await createCDNUrl(data.data.scrapeSingleScene[0].remote_site_id)
+        data.data.scrapeSingleScene[0].image = cdnURL
+    }
+    // multi-injection
+    if (data.data?.scrapeMultiScenes) {
+        for (let sceneIdx = 0; sceneIdx < data.data.scrapeMultiScenes.length; sceneIdx++) {
+            for (let resultIdx = 0; resultIdx < data.data.scrapeMultiScenes[sceneIdx].length; resultIdx++) {
+                const cdnURL = await createCDNUrl(data.data.scrapeMultiScenes[sceneIdx][resultIdx].remote_site_id)
+                data.data.scrapeMultiScenes[sceneIdx][resultIdx].image = cdnURL
+            }
+        }
+    }
     return data
 }
 
