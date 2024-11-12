@@ -20,7 +20,8 @@
         const video = evt.target
         await delay(500)
         if (!checkHover()) return
-        video.muted = false
+        const keepMuted = forbiddenConfig.getPluginSetting("tag-video", "keepMuted", false)
+        video.muted = keepMuted
         video.currentTime = 0
         video.play()
             .then(() => setInterval(checkHover, 100))
@@ -64,7 +65,7 @@
         if (document.hidden) {
             allVideos.forEach(video => video.muted = true)
             // setTimeout to auto-stop videos after 2s of hidden
-            setTimeout(() => { if (document.hidden) allVideos.forEach(video => video.pause()) }, 200)
+            setTimeout(() => { if (document.hidden) allVideos.forEach(video => video.pause()) }, 2000)
         } else {
             allVideos.forEach(video => {
                 const startInt = Math.floor(Math.random() * 200 * allVideos.length)
