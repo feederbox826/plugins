@@ -1,4 +1,4 @@
-/* /tag/ID page with fullscreen */
+/* add css styles for videos (not just images) */
 .detail-header-image video {
 	margin: auto;
 	max-width: 14rem;
@@ -31,27 +31,6 @@
 
 #movie-page .detail-header-image .movie-images video {
 	max-width: 13rem
-}
-
-/* grouped tag views /tag and hover preview*/
-.zoom-0 .tag-card-image {
-	width: 16rem;
-}
-
-.zoom-1 .tag-card-image {
-	width: 20rem;
-}
-
-.zoom-2 .tag-card-image {
-	width: 24rem;
-}
-
-.zoom-3 .tag-card-image {
-	width: 28rem;
-}
-
-.tag-card.grid-card {
-	width: initial !important;
 }
 
 video.tag-video {
