@@ -33,17 +33,22 @@
     function replace(img, hover = false) {
         const src = img.getAttribute("src")
         const video = document.createElement("video")
-        const propName = ["autoplay", "muted", "loop", "playsinline"]
+        const propName = ["autoplay", "muted", "loop", "playsInline", "disableRemotePlayback"]
         propName.forEach(prop => video[prop] = true)
         video.attributes.alt = img.attributes.alt
         video.classList = img.classList
         video.classList.add("tag-video")
-        video.disableRemotePlayback = true
         video.src = src
         video.poster = src
         if (hover) {
             video.addEventListener('mouseover', playVideo)
             video.addEventListener('mouseout', stopVideo)
+        }
+        // add error handling
+        video.onerror = () => {
+            // replace with img
+            img.style.removeProperty("display")
+            video.remove()
         }
         // hide image for tag-cropper
         img.setAttribute("placeholder", "")
