@@ -45,11 +45,11 @@
             video.addEventListener('mouseout', stopVideo)
         }
         // add error handling
-        video.onerror = () => {
-            // replace with img
-            img.style.removeProperty("display")
-            video.remove()
-        }
+        // video.onerror = () => {
+        //     // replace with img
+        //     img.style.removeProperty("display")
+        //     video.remove()
+        // }
         // hide image for tag-cropper
         img.setAttribute("placeholder", "")
         img.style.display = "none"
