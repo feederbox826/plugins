@@ -1,0 +1,9 @@
+name: filepath-copy
+description: Copy file path to clipboard when selected
+version: 0.1
+# requires: wfke
+ui:
+  requires:
+  - wfke
+  javascript:
+  - filepath-copy.js
