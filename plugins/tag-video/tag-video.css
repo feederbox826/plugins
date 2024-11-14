@@ -1,38 +1,28 @@
-/* add css styles for videos (not just images) */
+/* /tag/ID page with fullscreen */
 .detail-header-image video {
+	width: 100%;
 	margin: auto;
-	max-width: 14rem;
-	transition: .5s
+	transition: .5s;
+	border-radius: .5rem;
 }
 
-@media (max-width: 576px) {
-	.detail-header-image .movie-images video {
-		max-width:100%
+/* grouped tag views /tag and hover preview*/
+.tag-card-image {
+	& .zoom-0 {
+		width: 16rem;
 	}
-	#tag-page .detail-header-image video {
-		max-width:100%
+	& .zoom-1 {
+		width: 20rem;
+	}
+	& .zoom-2 {
+		width: 24rem;
+	}
+	& .zoom-3 {
+		width: 28rem;
 	}
 }
 
-#tag-page .detail-header-image video {
-	border-radius: .5rem
-}
-
-#tag-page .detail-header.collapsed .detail-header-image video {
-	max-width: 18rem
-}
-
-#tag-page .detail-header-image video {
-	max-width: 20rem
-}
-#tag-page .full-width .detail-header-image video {
-	max-width: 22rem
-}
-
-#movie-page .detail-header-image .movie-images video {
-	max-width: 13rem
-}
-
+/* generic */
 video.tag-video {
 	vertical-align: middle;
 	border-style: none;
