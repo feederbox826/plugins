@@ -39,21 +39,21 @@
         video.classList = img.classList
         video.classList.add("tag-video")
         video.src = src
-        video.poster = src
+        video.poster = "/plugin/tag-video/assets/loading.svg"
         if (hover) {
             video.addEventListener('mouseover', playVideo)
             video.addEventListener('mouseout', stopVideo)
         }
-        // add error handling
-        // video.onerror = () => {
-        //     // replace with img
-        //     img.style.removeProperty("display")
-        //     video.remove()
-        // }
         // hide image for tag-cropper
         img.setAttribute("placeholder", "")
         img.style.display = "none"
         img.before(video)
+        // add error handling
+        video.onerror = () => {
+            // replace with img
+            img.style.removeProperty("display")
+            video.remove()
+        }
     }
     const pathSwitcher = (path) => {
         if (path == "/tags") replaceAll()

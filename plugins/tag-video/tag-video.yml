@@ -1,6 +1,6 @@
 name: tag-video
 description: Add <video> support to tag images
-version: 0.1.12
+version: 0.2.0
 # requires: wfke
 # requires: forbiddenConfig
 ui:
@@ -11,6 +11,8 @@ ui:
   - tag-video.js
   css:
   - tag-video.css
+  assets:
+    /: assets
 settings:
   keepMuted:
     displayName: Keep videos muted, even when hovered
