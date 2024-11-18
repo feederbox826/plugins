@@ -102,25 +102,34 @@ if (!parentTagID) {
 }
 
 // iterate over performer
-const getPerformers = () =>
-    gql.Do(`
-    query ($exid: [ID!]){
-    findPerformers(
-        performer_filter: { tags: {
-            excludes: $exid,
-            modifier: INCLUDES_ALL,
-            depth: -1 }}) {
+const getPerformers = () => {
+    const results =  gql.Do(`
+        query ($exid: [ID!]) {
+        findPerformers(
+        performer_filter: {
+            tags: {
+                excludes: $exid,
+                modifier: INCLUDES_ALL,
+                depth: -1,
+                value: [] }
+            measurements: { modifier: NOT_NULL, value: "" }}) {
     performers {
         id measurements
     }}}`, {
         exid: [parentTagID]
-    }).findPerformers.performers
-        .forEach(performer => setPerformer(performer.id, performer.measurements))
+    })
+    const performers = results.findPerformers.performers
+    log.Debug(`Tagging ${performers.length} performers`)
+    for (const performer of performers) {
+        setPerformer(performer.id, performer.measurements)
+    }
+}
 
 // get performer
 function setPerformer(id, measurements) {
+    log.Debug(`Trying to tag performer: ${id}`)
     // split measurements
-    const cupRegex = /\d{2}([A-H]{1}|A{1,3}|D{2,4})-\d{2}-\d{2}/
+    const cupRegex = /\d{2}([A-H]{1}|A{1,3}|D{2,4})(?:-\d{2}-\d{2})?/
     if (!cupRegex.test(measurements)) {
         return
     }
