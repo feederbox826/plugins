@@ -106,7 +106,9 @@ const getPerformers = () =>
     gql.Do(`
     query ($exid: ID!){
     findPerformers(
-        performer_filter: { tags: { excludes: [$exid], depth: 2, modifier: INCLUDES_ALL } }
+        performer_filter: { tags: {
+            excludes: [$exid],
+            modifier: INCLUDES_ALL } }
     ) {
     performers {
         id measurements
