@@ -104,16 +104,16 @@ if (!parentTagID) {
 // iterate over performer
 const getPerformers = () =>
     gql.Do(`
-    query ($exid: ID!){
+    query ($exid: [ID!]){
     findPerformers(
         performer_filter: { tags: {
-            excludes: [$exid],
-            modifier: INCLUDES_ALL } }
-    ) {
+            excludes: $exid,
+            modifier: INCLUDES_ALL,
+            depth: -1 }}) {
     performers {
         id measurements
     }}}`, {
-        exid: parentTagID
+        exid: [parentTagID]
     }).findPerformers.performers
         .forEach(performer => setPerformer(performer.id, performer.measurements))
 
