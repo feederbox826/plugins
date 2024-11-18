@@ -1,0 +1,11 @@
+name: cuptag
+description: Tag performers with cup sizes
+version: 0.0.1
+exec:
+  - cuptag.js
+interface: js
+tasks:
+  - name: Create Cup Tags
+    description: Create cup size tags
+    defaultArgs:
+      mode: create

@@ -8,6 +8,9 @@ Index URL: `https://feederbox826.github.io/plugins/main/index.yml`
 avg-rating
 - adds average rating to (studios, performers, movies) in %
 
+cuptag
+- Tag performers with cup sizes
+
 deleteFP
 - adds a button to delete fingerprints
 
