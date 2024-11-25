@@ -1,5 +1,5 @@
 # fbox-tag-download
-Downloads opinionated tag videos and images
+Downloads opinionated tag videos and images from tags.feederbox.cc. See [feederbox.cc/gh/tags](https://feederbox.cc/gh/tags) for details
 
 ## Settings
 ### Download Video Tags
@@ -14,8 +14,10 @@ Optionally create missing tags if they have media available
 Replaces default/ empty tags with available tag media with an `[fbox-tag]` parent tag
 
 ### Refresh Tags
-Adds new tags/ update existing tags if a new version has been released
+Adds new tags/ update existing tags if it has been updated
 
 ### Recreate Tags
 > [!WARNING]
 > This is a very slow process and should only be done when switching between video/ image tags
+
+Downloads tag videos/images, overwriting existing ones if they are tagged with `[fbox-tag]`

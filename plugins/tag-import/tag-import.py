@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 
 CREATE_MISSING_TAGS = False;
 DOWNLOAD_VIDEO_TAGS = False;
+ALLOW_IGNORE_TAGS = False;
 REFRESH = False;
 FORCE_OVERWRITE = False;
 # custom prefixes to exclude
@@ -83,11 +84,16 @@ def syncTags():
     for PREFIX in EXCLUDE_PREFIX:
       if name.startswith(PREFIX):
         continue
-    # skip flagged as ignored
-    if media.get("ignore") == True:
+    # possibly allow ignore tags
+    if (ALLOW_IGNORE_TAGS and media.get("ignore") == True):
+      log.info("allowing ignore tag: " + name)
+      localTag = stash.find_tag(name, create=False)
+    elif (media.get("ignore") == True):
+      log.info("ignoring tag: " + name)
       continue
-    # search in local tags, optionally create
-    localTag = stash.find_tag(name, create=CREATE_MISSING_TAGS)
+    else:
+      # search in local tags, optionally create
+      localTag = stash.find_tag(name, create=CREATE_MISSING_TAGS)
     # if not found, skip
     if localTag is None:
       continue
@@ -137,6 +143,7 @@ settings = config["plugins"]["tag-import"]
 if (settings):
   DOWNLOAD_VIDEO_TAGS = settings.get('video-tags', False)
   CREATE_MISSING_TAGS = settings.get('create-missing', False)
+  ALLOW_IGNORE_TAGS = settings.get('allow-ignore', False)
 
 if 'mode' in json_input['args']:
   PLUGIN_ARGS = json_input['args']["mode"]

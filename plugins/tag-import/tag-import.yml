@@ -1,6 +1,6 @@
 name: tag-import
 description: feederbox opinionated tag import
-version: 0.1.2
+version: 0.1.3
 exec:
   - python
   - "{pluginDir}/tag-import.py"
@@ -24,4 +24,7 @@ settings:
     type: BOOLEAN
   create-missing:
     displayName: Create missing tags that have media available
+    type: BOOLEAN
+  allow-ignore:
+    displayName: Add tags to "ignored" tags that exist locally
     type: BOOLEAN
