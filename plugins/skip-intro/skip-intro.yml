@@ -2,7 +2,7 @@ name: skip-intro
 description: Skips static duration intros
 # requires: 0gql-intercept
 # requires: CommunityScriptsUILibrary
-version: 0.2.0
+version: 0.2.1
 ui:
   requires:
     - CommunityScriptsUILibrary

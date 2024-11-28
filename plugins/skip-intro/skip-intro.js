@@ -36,6 +36,13 @@ function readyPage(event) {
   // get stashDB studioID
   const studio = event.detail.data.findScene.studio
   const studioID = getSDBID(studio.stash_ids)
+  // try studio first
+  if (studioID && introMap.has(studioID)) {
+    // check if studio data is in map
+    console.debug("skip-intro found and setting up");
+    hookVideo(introMap.get(studioID)); // set up skipper
+    return;
+  }
   // if parentStudio, get id
   if (studio.parent_studio)
     getNetworkID(studio.parent_studio.id)
@@ -46,11 +53,6 @@ function readyPage(event) {
           hookVideo(introMap.get(networkID)); // set up skipper
         }
       })
-  if (studioID && introMap.has(studioID)) {
-    // check if studio data is in map
-    console.debug("skip-intro found and setting up");
-    hookVideo(introMap.get(studioID)); // set up skipper
-  }
 }
 const cacheIntros = () =>
   fetch("https://feederbox826.github.io/stash-skip-intro/intros.json")
