@@ -1,7 +1,5 @@
-// handle entries from remote
 // import cache from localStorage
 const introMap = new Map(Object.entries({
-  ...intros,
   ...JSON.parse(localStorage.getItem("skip-intro-cache") || "{}")
 }))
 
@@ -20,46 +18,49 @@ const hookVideo = (endTime) => wfke("video-js>video", () => {
   // only fire events once per video
 });
 
-async function cacheNetwork() {
-  // cache network sub-studios
-  // check if cache is up-to-date
-  const cache = localStorage.getItem("skip-intro-cache-len");
-  if (cache && cache == networks.length) return;
-  // fetch from StashDB
-  // add timeout for stashdb
-  if (!window?.stashdb) return setTimeout(cacheNetwork, 500)
-  const networkCache = {};
-  for (const network of Object.keys(networks)) {
-    const introTime = networks[network];
-    const query = `query ($id: ID) {
-      findStudio(id: $id) {
-      child_studios {
-          id
-      }}}`
-    const variables = { id: network };
-    const dbResponse = await stashdb.callGQL({ query, variables })
-    dbResponse.findStudio.child_studios
-      .map(studio => studio.id)
-      .forEach(studio => networkCache[studio] = introTime);
-    // update localstorage cache
-    localStorage.setItem("skip-intro-cache-len", networks.length);
-    localStorage.setItem("skip-intro-cache", JSON.stringify(networkCache));
-  }
-}
+const getNetworkID = (studioid) => csLib.callGQL({
+  query: `query ($id: ID!) {
+  findStudio(id: $id) {
+    stash_ids {
+      endpoint stash_id
+  }}}`,
+  variables: { id: studioid },
+}).then(data => getSDBID(data.findStudio.stash_ids));
+
+const getSDBID = (stash_ids) => stash_ids.find(id => id.endpoint == "https://stashdb.org/graphql")?.stash_id
 
 // ready on page reloads
 function readyPage(event) {
   // intercept GQL request
   if (!event.detail?.data?.findScene) return; // only trigger on findScene
   // get stashDB studioID
-  const studioID = event.detail.data.findScene.studio.stash_ids.find(
-    (id) => id.endpoint == "https://stashdb.org/graphql",
-  )?.stash_id;
+  const studio = event.detail.data.findScene.studio
+  const studioID = getSDBID(studio.stash_ids)
+  // if parentStudio, get id
+  if (studio.parent_studio)
+    getNetworkID(studio.parent_studio.id)
+      .then(networkID => {
+        if (networkID && introMap.has(networkID)) {
+          // check if network data is in map
+          console.debug("skip-intro found and setting up");
+          hookVideo(introMap.get(networkID)); // set up skipper
+        }
+      })
   if (studioID && introMap.has(studioID)) {
     // check if studio data is in map
     console.debug("skip-intro found and setting up");
     hookVideo(introMap.get(studioID)); // set up skipper
   }
 }
+const cacheIntros = () =>
+  fetch("https://feederbox826.github.io/stash-skip-intro/intros.json")
+    .then(response => response.json())
+    .then(data => {
+      for (const [key, value] of Object.entries(data)) {
+        introMap.set(key, value);
+      }
+      localStorage.setItem("skip-intro-cache", JSON.stringify(Object.fromEntries(introMap)))
+    })
+
 fbox826.gqlListener.addEventListener("response", readyPage);
-cacheNetwork()
+cacheIntros()
