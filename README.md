@@ -5,6 +5,9 @@ Index URL: `https://feederbox826.github.io/plugins/main/index.yml`
 ![Adding repository](docs/add-plugins.png)
 
 # Plugins
+autovr
+- automatically select and enter appropate VR modes
+
 avg-rating
 - adds average rating to (studios, performers, movies) in %
 
@@ -71,6 +74,9 @@ vjs-mmb-shortcut
 
 vjs-shortcut
 - Adds (most) [YouTube](https://support.google.com/youtube/answer/7631406) keyboard shortcuts to VideoJS
+
+vjs-vr-zoom
+- Add mouse wheel zoom to VR scenes
 
 # Dependency plugins
 0gql-intercept

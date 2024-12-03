@@ -1,0 +1,9 @@
+name: vjs-vr-zoom
+description: VideoJS VR zoom controls
+version: 0.1
+# requires: vjs-shortcut
+ui:
+  requires:
+  - vjs-shortcut
+  javascript:
+  - vjs-vr-zoom.js

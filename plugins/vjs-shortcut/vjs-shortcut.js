@@ -96,4 +96,6 @@ function init() {
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
   // parse markers
   markers = player.markers().markers.map(marker => marker.time);
+  document.dispatchEvent(new CustomEvent("vjs-shortcut:ready", { "detail": { player } }));
 }
+PluginApi.Event.addEventListener("stash:location", () => wfke("video-js", init))

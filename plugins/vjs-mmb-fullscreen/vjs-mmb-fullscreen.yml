@@ -1,6 +1,6 @@
 name: vjs-mmb-fullscreen
 description: VideoJS middle mouse button fullscreen
-version: 0.1
+version: 0.2
 # requires: vjs-shortcut
 ui:
   requires:
