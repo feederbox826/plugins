@@ -1,0 +1,15 @@
+name: autovr
+description: automatically toggle VR mode
+# requires: forbiddenConfig
+# requires: wfke
+version: 0.1
+ui:
+  requires:
+  - forbiddenConfig
+  - wfke
+  javascript:
+  - autovr.js
+settings:
+  defaultProjection:
+    displayName: Default projection (180_LR, Sphere, 360_TB)
+    type: STRING
