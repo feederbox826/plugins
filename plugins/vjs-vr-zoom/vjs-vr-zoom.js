@@ -10,8 +10,8 @@ document.addEventListener("vjs-shortcut:ready", (event) => {
   const setFOV = (increase) => {
     const camera = player.vr().camera
     let newFov = camera.fov += increase ? 5 : -5
-    if (newFov >= 180) newFov = 180
-    if (newFov <= 10) newFov = 10
+    if (newFov >= 175) newFov = 175
+    if (newFov <= 5) newFov = 5
     camera.fov = newFov
     camera.updateProjectionMatrix()
   }
