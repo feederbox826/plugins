@@ -1,5 +1,5 @@
 name: log-console
-description: display log messages in console
+description: Display log messages in the web browser console
 version: 1.0
 ui:
   javascript:
