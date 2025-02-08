@@ -30,8 +30,8 @@ const navMarker = (next = true) => {
   const curTime = player.currentTime();
   const marker = next
     ? markers.find(marker => marker > curTime)
-    : markers.reverse().find(marker => marker < curTime-5)
-  if (marker) player.currentTime(marker);
+    : markers.toReversed().find(marker => marker < curTime-5)
+  if (marker) video.currentTime = marker;
 }
 
 const changePbRate = (increase = true) => {
