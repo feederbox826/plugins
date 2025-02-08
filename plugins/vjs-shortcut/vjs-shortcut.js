@@ -10,7 +10,7 @@ c - activate/ deactivate captions
 */
 
 // declarations
-let video, player, framestep;
+let player, framestep;
 let markers = [];
 
 wfke("video-js", init);
@@ -27,7 +27,7 @@ const toggleCaptions = () => {
 };
 
 const navMarker = (next = true) => {
-  const curTime = video.currentTime;
+  const curTime = player.currentTime();
   const marker = next
     ? markers.find(marker => marker > curTime)
     : markers.toReversed().find(marker => marker < curTime-5)
@@ -55,25 +55,25 @@ function handleKey(evt) {
   const key = evt.key;
   // Home | 0 - Seek to start of video
   if (key == "Home" || key == "0") {
-    video.currentTime = 0;
+    player.currentTime(0);
     evt.preventDefault();
   }
   // End - Seek to end of video
   else if (key == "End") {
-    video.currentTime = video.duration;
+    player.currentTime(player.duration());
     evt.preventDefault();
   }
   // . - Step forward 1 frame
-  else if (key == "." && video.paused) {
-    video.currentTime += framestep;
+  else if (key == "." && player.paused()) {
+    player.currentTime(player.currentTime() + framestep);
     evt.preventDefault();
   } // , - step backward 1 frame
-  else if (key == "," && video.paused) {
-    video.currentTime -= framestep;
+  else if (key == "," && player.paused()) {
+    player.currentTime(player.currentTime() - framestep);
     evt.preventDefault();
   }
   // Ctrl + ], [ - Jump to next/previous marker
-  else if (key == "]" && evt.ctrlKey && markers.length ) navMarker(true);
+  else if (key == "]" && evt.ctrlKey && markers.length) navMarker(true);
   else if (key == "[" && evt.ctrlKey && markers.length) navMarker(false);
   // slow down playback rate
   else if (key == "<") changePbRate(false);
@@ -90,7 +90,6 @@ function handleKey(evt) {
 // constants
 function init() {
   player = document.querySelector("video-js").player;
-  video = document.querySelector("video-js>video");
   player.on("keydown", handleKey);
   // once scene info is loaded, get framerate
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
