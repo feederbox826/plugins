@@ -29,6 +29,9 @@ log-toast
 markergen
 - generate markers once they've been saved
 
+overlay-info
+- add video codec, css classes to overlay data (resolution, codec)
+
 rebrand
 - add a custom name instead of "Stash" to identify your instance(s)
 - add a custom favicon

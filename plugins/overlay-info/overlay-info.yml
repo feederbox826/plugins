@@ -1,0 +1,8 @@
+name: overlay-info
+description: Adds more information to scene card overlay
+version: 0.1
+ui:
+  javascript:
+  - overlay-info.js
+  css:
+  - overlay-info.css
