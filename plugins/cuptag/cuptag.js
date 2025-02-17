@@ -132,7 +132,7 @@ function setPerformer(id, measurements) {
     const cupRegex = /\d{2}([A-H]{1}|A{1,3}|D{2,4})(?:-\d{2}-\d{2})?/
     if (!cupRegex.test(measurements)) {
         log.Debug("No eligible cup size found")
-        log.Trace(measurements)
+        log.Debug(measurements)
         return
     }
     let cupSize = measurements.match(cupRegex)[1]
