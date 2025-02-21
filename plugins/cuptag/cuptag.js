@@ -1,13 +1,33 @@
 const ok = () => ({ output: "ok" })
 
-function main() {
+async function main() {
     log.Debug("Running cuptag plugin")
     const mode = input.Args.mode
     if (!mode) {
         // just return
         return ok()
     }
-    getPerformers()
+
+    let totalRuns = 0
+    let lastTaggedCount = -1
+    let currentTaggedCount = 0
+
+    // Keep running until no new performers are tagged
+    while (true) {
+        currentTaggedCount = await getPerformers()
+        log.Debug(`Run ${totalRuns + 1} tagged ${currentTaggedCount} performers`)
+        
+        // If we didn't tag any new performers or tagged the same amount as last time, stop
+        if (currentTaggedCount === 0 || currentTaggedCount === lastTaggedCount) {
+            break
+        }
+        
+        lastTaggedCount = currentTaggedCount
+        totalRuns++
+    }
+
+    log.Debug(`Completed ${totalRuns + 1} runs, total performers processed`)
+    return ok()
 }
 
 // helper functions
@@ -102,47 +122,108 @@ if (!parentTagID) {
 }
 
 // iterate over performer
-const getPerformers = () => {
-    const results =  gql.Do(`
-        query ($exid: [ID!]) {
-        findPerformers(
-        performer_filter: {
-            tags: {
-                excludes: $exid,
-                modifier: INCLUDES_ALL,
-                depth: -1,
-                value: [] }
-            measurements: { modifier: NOT_NULL, value: "" }}) {
-    performers {
-        id measurements
-    }}}`, {
-        exid: [parentTagID]
-    })
-    const performers = results.findPerformers.performers
-    log.Debug(`Tagging ${performers.length} performers`)
-    for (const performer of performers) {
-        setPerformer(performer.id, performer.measurements)
+const getPerformers = async () => {
+    let page = 1;
+    let hasMore = true;
+    let totalTagged = 0;
+
+    while (hasMore) {
+        const results = gql.Do(`
+            query ($exid: [ID!], $page: Int) {
+            findPerformers(
+                filter: {
+                    per_page: 100,
+                    page: $page
+                },
+                performer_filter: {
+                    tags: {
+                        excludes: $exid,
+                        modifier: INCLUDES_ALL,
+                        depth: -1,
+                        value: [] }
+                    measurements: { modifier: NOT_NULL, value: "" }
+                }) {
+                count
+                performers {
+                    id 
+                    measurements
+                    stash_ids {
+                        endpoint
+                        stash_id
+                    }
+                }
+            }}`, {
+            exid: [parentTagID],
+            page: page
+        })
+        
+        const performers = results.findPerformers.performers
+        const count = results.findPerformers.count
+        
+        log.Debug(`Processing page ${page} with ${performers.length} performers (Total: ${count})`)
+        
+        // If no performers found, break
+        if (!performers || performers.length === 0) {
+            hasMore = false
+            continue
+        }
+        
+        for (const performer of performers) {
+            setPerformer(performer.id, performer.measurements)
+            totalTagged++
+        }
+
+        hasMore = performers.length === 100 // If we got full page, there might be more
+        page++
     }
+
+    log.Debug(`Finished tagging ${totalTagged} performers`)
+    return totalTagged
 }
 
 // get performer
 function setPerformer(id, measurements) {
     log.Debug(`Trying to tag performer: ${id}`)
-    // split measurements
-    const cupRegex = /\d{2}([A-H]{1}|A{1,3}|D{2,4})(?:-\d{2}-\d{2})?/
-    if (!cupRegex.test(measurements)) {
+    
+    // Normalize measurements to handle both formats
+    const match = measurements.match(cupRegex)
+    if (!match) {
         log.Debug("No eligible cup size found")
         log.Debug(measurements)
         return
     }
-    let cupSize = measurements.match(cupRegex)[1]
+
+    // Extract the numeric and letter parts
+    const fullMatch = match[0]
+    let cupSize, bandSize
+
+    // Check if it starts with numbers or letters
+    if (/^\d/.test(fullMatch)) {
+        // Format: 32DD
+        bandSize = fullMatch.match(/^\d{2}/)[0]
+        cupSize = fullMatch.match(/[A-Z]+/i)[0].toUpperCase()
+    } else {
+        // Format: DD32
+        cupSize = fullMatch.match(/^[A-Z]+/i)[0].toUpperCase()
+        bandSize = fullMatch.match(/\d{2}/)[0]
+    }
+
     // use hardcoded conversion if necessary
     const conversion = CUP_CONVERSION[cupSize]
     if (conversion) cupSize = conversion
+
+    // Create standardized format for tag
+    const tagSize = `${bandSize}${cupSize}`
+    
     // find or add cuptag
-    const cupTag = findOrAddCupTag(PREFIX + cupSize)
+    const cupTag = findOrAddCupTag(PREFIX + tagSize)
+    
     // add cuptag to performer
     addTag(id, cupTag)
-    log.Debug(`Added tag ${cupSize} to performer ${id}`)
+    log.Debug(`Added tag ${tagSize} to performer ${id}`)
 }
+
+// Update the regex to handle more formats
+const cupRegex = /(?:\d{2}[A-Z]{1,4}|[A-Z]{1,4}\d{2})(?:-\d{2}-\d{2})?/i
+
 main()
