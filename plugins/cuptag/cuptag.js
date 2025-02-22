@@ -112,6 +112,28 @@ const CUP_CONVERSION = {
     "F": "F/DDD",
     "DDDD": "G/DDDD",
     "G": "G/DDDD",
+    "A": "A",
+    "AA": "AA",
+    "B": "B",
+    "C": "C",
+    "D": "D",
+    "H": "H",
+    "HH": "I/HH",
+    "I": "I/HH",
+    "J": "J",
+    "JJ": "K/JJ",
+    "K": "K/JJ",
+    "EE": "F/EE",
+    "FF": "G/FF",
+    "GG": "H/GG",
+    "dd": "E/DD",
+    "ddd": "F/DDD",
+    "dddd": "G/DDDD",
+    "ee": "F/EE",
+    "ff": "G/FF",
+    "gg": "H/GG",
+    "hh": "I/HH",
+    "jj": "K/JJ"
 }
 
 // get parent cuptag
@@ -181,7 +203,17 @@ const getPerformers = async () => {
     return totalTagged
 }
 
-// get performer
+function normalizeCupSize(size) {
+    // Remove any spaces
+    size = size.trim().toUpperCase();
+    
+    // Handle special cases
+    if (size.includes('/')) return size; // Already normalized
+    
+    // Remove any non-letter characters
+    return size.replace(/[^A-Z]/g, '');
+}
+
 function setPerformer(id, measurements) {
     log.Debug(`Trying to tag performer: ${id}`)
     
@@ -208,12 +240,12 @@ function setPerformer(id, measurements) {
         bandSize = fullMatch.match(/\d{2}/)[0]
     }
 
-    // use hardcoded conversion if necessary
+    cupSize = normalizeCupSize(cupSize);
     const conversion = CUP_CONVERSION[cupSize]
     if (conversion) cupSize = conversion
 
     // Create standardized format for tag
-    const tagSize = `${bandSize}${cupSize}`
+    const tagSize = cupSize
     
     // find or add cuptag
     const cupTag = findOrAddCupTag(PREFIX + tagSize)
