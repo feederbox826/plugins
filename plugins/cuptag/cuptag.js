@@ -106,34 +106,19 @@ function addTag(performerID, tagID) {
 const PREFIX = "[Cup]: "
 const PARENT_TAG_NAME = PREFIX+"Size"
 const CUP_CONVERSION = {
+    // D-variants with special notation
     "DD": "E/DD",
     "E": "E/DD",
     "DDD": "F/DDD",
     "F": "F/DDD",
     "DDDD": "G/DDDD",
     "G": "G/DDDD",
-    "A": "A",
-    "AA": "AA",
-    "B": "B",
-    "C": "C",
-    "D": "D",
-    "H": "H",
-    "HH": "I/HH",
-    "I": "I/HH",
-    "J": "J",
-    "JJ": "K/JJ",
-    "K": "K/JJ",
-    "EE": "F/EE",
-    "FF": "G/FF",
-    "GG": "H/GG",
-    "dd": "E/DD",
-    "ddd": "F/DDD",
-    "dddd": "G/DDDD",
-    "ee": "F/EE",
-    "ff": "G/FF",
-    "gg": "H/GG",
-    "hh": "I/HH",
-    "jj": "K/JJ"
+    // Double letters convert to next letter (except D-variants)
+    "EE": "F/DDD",
+    "FF": "G/DDDD",
+    "GG": "H",
+    "HH": "I",
+    "JJ": "K"
 }
 
 // get parent cuptag
