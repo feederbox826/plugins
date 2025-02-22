@@ -54,20 +54,14 @@ const createTag = (tagname) =>
 function findOrAddCupTag(size) {
     // look for tag
     const tag = findTag(size)
-    if (tag) {
-        return tag
-    } else {
-        // create tag
-        return createChildTag(size, parentTagID)
-    }
+    return tag ? tag : createChildTag(size, parentTagID)
 }
 
 function addTag(performerID, tagID) {
     const oldtags = gql.Do(`
         query ($id: ID!) {
         findPerformer(id: $id) {
-            tags { id
-    }}}`, {
+            tags { id }}}`, {
         id: performerID
     }).findPerformer.tags
         .map(tag => tag.id)
@@ -95,10 +89,12 @@ const CUP_CONVERSION = {
 }
 
 // get parent cuptag
-const parentTagID = findTag(PARENT_TAG_NAME)
+let parentTagID = findTag(PARENT_TAG_NAME)
 if (!parentTagID) {
     log.Info("Parent tag not found")
     createTag(PARENT_TAG_NAME)
+    // set parentTagID
+    parentTagID = findTag(PARENT_TAG_NAME)
 }
 
 // iterate over performer
@@ -106,6 +102,7 @@ const getPerformers = () => {
     const results =  gql.Do(`
         query ($exid: [ID!]) {
         findPerformers(
+        filter: { per_page: -1 }
         performer_filter: {
             tags: {
                 excludes: $exid,
@@ -129,13 +126,12 @@ const getPerformers = () => {
 function setPerformer(id, measurements) {
     log.Debug(`Trying to tag performer: ${id}`)
     // split measurements
-    const cupRegex = /\d{2}([A-H]{1}|A{1,3}|D{2,4})(?:-\d{2}-\d{2})?/
+    const cupRegex = /([A-Z]{1}|A{1,3}|D{2,4}|[F-P]{2})/i
     if (!cupRegex.test(measurements)) {
-        log.Debug("No eligible cup size found")
-        log.Debug(measurements)
+        log.Error(`No matching cup size for performer ${id} - ${measurements}`)
         return
     }
-    let cupSize = measurements.match(cupRegex)[1]
+    let cupSize = measurements.match(cupRegex)[1].toUpperCase()
     // use hardcoded conversion if necessary
     const conversion = CUP_CONVERSION[cupSize]
     if (conversion) cupSize = conversion
@@ -143,6 +139,6 @@ function setPerformer(id, measurements) {
     const cupTag = findOrAddCupTag(PREFIX + cupSize)
     // add cuptag to performer
     addTag(id, cupTag)
-    log.Debug(`Added tag ${cupSize} to performer ${id}`)
+    log.Info(`Added tag ${cupSize} to performer ${id}`)
 }
 main()
