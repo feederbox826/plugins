@@ -1,6 +1,6 @@
 name: cuptag
 description: Tag performers with cup sizes
-version: 0.1.0
+version: 0.1.1
 exec:
   - cuptag.js
 interface: js

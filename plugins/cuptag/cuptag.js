@@ -122,19 +122,30 @@ const getPerformers = () => {
     }
 }
 
+function getCupSize(measurements) {
+    // split measurements
+    const cupRegex = /(A{1,3}|D{2,4}|[F-P]{2}|[A-Z]{1})/i
+    if (!cupRegex.test(measurements)) {
+        return false
+    } 
+    const cupSize = measurements.match(cupRegex)[1].toUpperCase()
+    // validate cupSize length (repeat)
+    if (cupSize.length >= 2 && (cupSize[0] !== cupSize[1])) {
+        return false
+    }
+    // use hardcoded conversion if necessary
+    const conversion = CUP_CONVERSION[cupSize]
+    return conversion ? conversion : cupSize
+}
+
 // get performer
 function setPerformer(id, measurements) {
     log.Debug(`Trying to tag performer: ${id}`)
-    // split measurements
-    const cupRegex = /([A-Z]{1}|A{1,3}|D{2,4}|[F-P]{2})/i
-    if (!cupRegex.test(measurements)) {
-        log.Error(`No matching cup size for performer ${id} - ${measurements}`)
+    const cupSize = getCupSize(measurements)
+    if (!cupSize) {
+        log.Error(`No cup size found for performer ${id} with measurements ${measurements}`)
         return
     }
-    let cupSize = measurements.match(cupRegex)[1].toUpperCase()
-    // use hardcoded conversion if necessary
-    const conversion = CUP_CONVERSION[cupSize]
-    if (conversion) cupSize = conversion
     // find or add cuptag
     const cupTag = findOrAddCupTag(PREFIX + cupSize)
     // add cuptag to performer
