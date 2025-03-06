@@ -3,8 +3,25 @@
 	width: 100%;
 	margin: auto;
 	transition: .5s;
-	border-radius: .5rem;
 }
+#tag-page .full-width .detail-header-image video {
+	max-width: 22rem;
+}
+
+#tag-page .detail-header.collapsed .detail-header-image video {
+	max-width: 18rem
+}
+
+#tag-page .detail-header-image video {
+	max-width: 20rem
+}
+
+@media (max-width: 576px) {
+	#tag-page .detail-header-image video {
+		max-width:100%
+	}
+}
+
 
 /* grouped tag views /tag and hover preview*/
 .tag-card-image {
