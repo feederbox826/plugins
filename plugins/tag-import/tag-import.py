@@ -16,10 +16,16 @@ FORCE_OVERWRITE = False;
 EXCLUDE_PREFIX = ["r:", "c:", ".", "stashdb", "Figure", "["]
 BASEURL = "https://tags.feederbox.cc"
 
-# stash's tag image size is at most 240px high, the thumbs are generated at 256px high.
-# if you want a fullsize archive, please contact me instead
-# this is to prevent abuse of the server but left in for debugging purposes
-DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER = False;
+
+# If you want the full archive, please contact me directly
+# https://feederbox.cc
+
+# thumb - 256x256
+# small - 512x512
+# large - 1000x1000
+
+# original - Please no. This will bust my cache and the images go up to 5000x5000 @14MB ea
+QUALITY = "small";
 
 tagserv_s = requests.Session()
 
@@ -39,10 +45,7 @@ def processFilename(media):
     return f"/media/original/{media['vid']}";
   # video not desired, but img is available
   elif (hasImg):
-    if (DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER):
-      return f"/media/original/{media['img']}";
-    else:
-      return f"/media/thumbs/{media['img']}";
+    return f"/media/{QUALITY}/{media['img']}";
   # only video, grab thumb of vid
   else:
     return f"/media/thumbs/{jpgStrip(media['vid'])}";
@@ -74,8 +77,8 @@ def updateTag(tagid, filename):
 
 def syncTags():
   # precheck
-  if DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER:
-    log.error("DOWNLOAD_FULLSIZE_AND_ABUSE_SERVER is enabled, please contact me for fullsize archives")
+  if QUALITY == "original":
+    log.error("original quality is enabled, please contact me for fullsize archives")
   # pull remote tag list
   remoteTags = requests.get(BASEURL + "/tags-export.json").json()
   # iterate on remote tags
