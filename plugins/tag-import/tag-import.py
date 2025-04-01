@@ -28,6 +28,12 @@ BASEURL = "https://tags.feederbox.cc"
 QUALITY = "small";
 
 tagserv_s = requests.Session()
+# header not for analytics, but for bot protection bypass
+# shouldn't affect anything if you remove it
+tagserv_s.headers.update({
+  "User-Agent": "feederbox/tag-import",
+  "Connection": "keep-alive"
+})
 
 # helpers
 def getStashTags():
@@ -80,7 +86,7 @@ def syncTags():
   if QUALITY == "original":
     log.error("original quality is enabled, please contact me for fullsize archives")
   # pull remote tag list
-  remoteTags = requests.get(BASEURL + "/tags-export.json").json()
+  remoteTags = tagserv_s.get(BASEURL + "/tags-export.json").json()
   # iterate on remote tags
   for name, media in remoteTags.items():
     # skip prefixes
