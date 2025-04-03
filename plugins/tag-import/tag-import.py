@@ -79,6 +79,12 @@ def updateTag(tagid, filename):
   # update tag with b64 image
   stash.update_tag({ "id": tagid, "image": image, "parent_ids": parents })
 
+def find_tag_videos():
+  plugins = stash.call_GQL("query { plugins { id }}")
+  log.debug(plugins)
+  if any (plugin['id'] == "tag-video" for plugin in plugins["plugins"]):
+    return True
+
 # main function
 
 def syncTags():
@@ -86,7 +92,13 @@ def syncTags():
   if QUALITY == "original":
     log.error("original quality is enabled, please contact me for fullsize archives")
   # pull remote tag list
-  remoteTags = tagserv_s.get(BASEURL + "/tags-export.json").json()
+  remoteTagReq = tagserv_s.get(BASEURL + "/tags-export.json")
+  # check for errors
+  if remoteTagReq.status_code != 200:
+    log.error("failed to fetch remote tag list")
+    log.error("status code: " + str(remoteTagReq.text))
+    return
+  remoteTags = remoteTagReq.json()
   # iterate on remote tags
   for name, media in remoteTags.items():
     # skip prefixes
@@ -148,11 +160,17 @@ stash = StashInterface(FRAGMENT_SERVER)
 fbox_tag_id = stash.find_tag("[fbox-tag]", create=True).get("id")
 
 config = stash.get_configuration()
-settings = config["plugins"]["tag-import"]
+settings = config["plugins"].get("tag-import")
+
 if (settings):
   DOWNLOAD_VIDEO_TAGS = settings.get('video-tags', False)
   CREATE_MISSING_TAGS = settings.get('create-missing', False)
   ALLOW_IGNORE_TAGS = settings.get('allow-ignore', False)
+
+# check for tag-video before downloading videos
+if DOWNLOAD_VIDEO_TAGS and not find_tag_videos():
+  log.error("tag-video plugin not found, disabling video download")
+  DOWNLOAD_VIDEO_TAGS = False
 
 if 'mode' in json_input['args']:
   PLUGIN_ARGS = json_input['args']["mode"]
