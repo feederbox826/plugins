@@ -23,8 +23,9 @@ BASEURL = "https://tags.feederbox.cc"
 # thumb - 256x256
 # small - 512x512
 # large - 1000x1000
-
+# webp - full resolution, but lightly compressed (experimental)
 # original - Please no. This will bust my cache and the images go up to 5000x5000 @14MB ea
+
 QUALITY = "small";
 
 tagserv_s = requests.Session()
@@ -54,7 +55,7 @@ def processFilename(media):
     return f"/media/{QUALITY}/{media['img']}";
   # only video, grab thumb of vid
   else:
-    return f"/media/thumbs/{jpgStrip(media['vid'])}";
+    return f"/media/{QUALITY}/{jpgStrip(media['vid'])}";
 
 def url_b64(filename):
   data = base64.b64encode(tagserv_s.get(BASEURL+filename).content)
