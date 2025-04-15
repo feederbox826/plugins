@@ -23,7 +23,7 @@ BASEURL = "https://tags.feederbox.cc"
 # thumb - 256x256
 # small - 512x512
 # large - 1000x1000
-# webp - full resolution, but lightly compressed (experimental)
+# optimized - full resolution, but lightly compressed (experimental)
 # original - Please no. This will bust my cache and the images go up to 5000x5000 @14MB ea
 
 QUALITY = "small";
