@@ -72,6 +72,9 @@ tagger-img-res
 watched-video
 - adds badge and css class to watched videos
 
+useragent
+- update stash User-Agent to latest
+
 vjs-mmb-shortcut
 - Middle Mouse Button for fullscreen toggle
 

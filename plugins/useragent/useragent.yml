@@ -1,0 +1,21 @@
+name: useragent
+description: Programatically set scraper User-Agent
+version: 0.1
+ui:
+  requires:
+  - 0gql-intercept
+  javascript:
+  - useragent.js
+  csp:
+    connect-src:
+    - https://jnrbsn.github.io/user-agents/user-agents.json
+exec:
+  - nullexec.js
+interface: js
+tasks:
+  - name: Firefox
+    description: Set to latest Firefox User Agent
+  - name: Chrome
+    description: Set to latest Chrome User Agent
+  - name: Current
+    description: Set to current User Agent
