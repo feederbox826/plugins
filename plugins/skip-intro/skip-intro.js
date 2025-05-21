@@ -31,6 +31,22 @@ const getSDBID = (stash_ids) => stash_ids.find(id => id.endpoint == "https://sta
 
 // ready on page reloads
 function readyPage(event) {
+  // check for studio page
+  if (event.detail?.data?.findStudio) { // trigger on findStudio
+    const studioID = getSDBID(event.detail.data.findStudio.stash_ids)
+    if (studioID && introMap.has(studioID)) {
+      // add marker
+    }
+    const networkID = event.detail.data.findStudio?.parent_studio?.id
+    if (networkID) {
+      getNetworkID(networkID)
+        .then(networkID => {
+          if (networkID && introMap.has(networkID)) {
+            // add marker
+          }
+        })
+    }
+  }
   // intercept GQL request
   if (!event.detail?.data?.findScene) return; // only trigger on findScene
   // get stashDB studioID

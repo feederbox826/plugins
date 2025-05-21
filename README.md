@@ -14,9 +14,6 @@ avg-rating
 cuptag
 - Tag performers with cup sizes
 
-deleteFP
-- adds a button to delete fingerprints
-
 edit-unorganized
 - Jumps to a chosen tab when an unorganized (or organized) scene is opened
 
