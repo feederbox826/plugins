@@ -8,6 +8,9 @@ async function toastLogs() {
       duration: 2000,
       close: false,
       className: "toast-box toast-internal",
+      offset: {
+        y: '3rem'
+      }
     }).showToast();
     console.log("[log-toast]", text);
   };
@@ -20,6 +23,9 @@ async function toastLogs() {
       close: true,
       stopOnFocus: true,
       className: `toast-box toast-${type}`,
+      offset: {
+        y: '3rem'
+      },
       onClick: function () {
         navigator.clipboard.writeText(this.text);
         intToast("Copied to clipboard");
