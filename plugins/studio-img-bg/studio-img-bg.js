@@ -68,6 +68,9 @@ function addStudioImgBG() {
 
     // toggle to dark mode if image is dark
     wfke(selector, checkImages)
-    PluginApi.Event.addEventListener("stash:location", () => wfke(selector, checkImages))
+    PluginApi.Event.addEventListener("stash:location", () => {
+        document.querySelectorAll(".studio-logo.checked").forEach(img => img.classList.remove("checked", "light", "dark", "neutral"))
+        wfke(selector, checkImages)
+    })
 }
 addStudioImgBG()
