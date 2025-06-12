@@ -60,6 +60,9 @@ tag-graph-js
 tag-import
 - import tags from https://tags.feederbox.cc
 
+tag-link
+- Tries linking local tags to StashDB, adds link icon
+
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
 

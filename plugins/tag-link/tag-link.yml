@@ -1,0 +1,21 @@
+name: tag-link
+description: link local tags to stashDB
+version: 0.0.1
+# requires: wfke
+# requires: forbiddenConfig
+# requires: stashdb-api
+ui:
+  requires:
+  - forbiddenConfig
+  - wfke
+  - stashdb-api
+  javascript:
+  - https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js
+  - tag-link.js
+  csp:
+    connect-src:
+      - https://tags.feederbox.cc/tags-export.json
+settings:
+  useRemote:
+    displayName: Use remote feederbox tag repo instead of searching only
+    type: BOOLEAN
