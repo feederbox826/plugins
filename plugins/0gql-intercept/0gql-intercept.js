@@ -14,9 +14,12 @@ function main() {
     interceptors
   }
 
-  const preCheck = (response) =>
-    response.headers.get("Content-Type") == "application/json" &&
-    response.url.endsWith("/graphql")
+  const preCheck = (response) => {
+    const contentType = response.headers.get("Content-Type")
+    return (contentType == "application/json"
+      || contentType == "application/graphql-response+json")
+      && response.url.endsWith("/graphql")
+  }
 
   const responseInterceptor = async (response, request) => {
     // skip if not ok or not a graphql request
