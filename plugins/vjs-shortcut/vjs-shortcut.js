@@ -46,8 +46,9 @@ const changePbRate = (increase = true) => {
   // if increase and is valid, increase
   // if decrease and is valid, decrease
   // otherwise do not change
-  const newRate =
-    increase && incrRate ? incrRate : decrRate ? decrRate : curRate;
+  const newRate = increase
+    ? (incrRate ?? curRate)
+    : (decrRate ?? curRate);
   player.playbackRate(newRate);
 };
 
