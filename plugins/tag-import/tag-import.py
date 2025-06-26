@@ -23,10 +23,10 @@ BASEURL = "https://tags.feederbox.cc"
 # thumb - 256x256
 # small - 512x512
 # large - 1000x1000
-# optimized - full resolution, but lightly compressed (experimental)
+# optimized - full resolution webp, but lightly compressed
 # original - Please no. This will bust my cache and the images go up to 5000x5000 @14MB ea
 
-QUALITY = "small";
+QUALITY = "optimized";
 
 tagserv_s = requests.Session()
 # header not for analytics, but for bot protection bypass
