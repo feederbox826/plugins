@@ -12,7 +12,9 @@
 | End | Seek to the end of the video |
 | 0 | Seek to the beginning of the video |
 | Shift+N | Move to next video |
+| ⏭️ Key | Move to next video |
 | Shift+P | Move to previous video |
+| ⏮️ Key | Move to previous video |
 | Ctrl + ] | Next marker |
 | Ctrl + [ | Previous Marker |
 
