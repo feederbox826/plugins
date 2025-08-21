@@ -1,0 +1,11 @@
+name: performer-age
+description: Tag performers with age tags
+version: 0.1
+exec:
+  - performer-age.js
+interface: js
+tasks:
+  - name: Create Age Tags
+    description: Create age tags
+    defaultArgs:
+      mode: create
