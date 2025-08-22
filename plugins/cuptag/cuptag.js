@@ -116,8 +116,11 @@ const getPerformers = () => {
         exid: [parentTagID]
     })
     const performers = results.findPerformers.performers
-    log.Debug(`Tagging ${performers.length} performers`)
-    for (const performer of performers) {
+    const count = performers.length
+    log.Debug(`Tagging ${count} performers`)
+    for (let i=0; i < performers.length; i++) {
+        const performer = performers[i]
+        log.Progress(i/count)
         setPerformer(performer.id, performer.measurements)
     }
 }
