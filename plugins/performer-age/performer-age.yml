@@ -1,11 +1,19 @@
 name: performer-age
 description: Tag performers with age tags
-version: 0.1
+version: 0.2
 exec:
-  - performer-age.js
-interface: js
+  - python
+  - "{pluginDir}/performer-age.py"
 tasks:
-  - name: Create Age Tags
-    description: Create age tags
+  - name: Real Age Tags
+    description: Tags based on performer's current age
     defaultArgs:
-      mode: create
+      mode: real-age
+  - name: Local Stash Scene Age Tags
+    description: Tags based on latest scene in Stash
+    defaultArgs:
+      mode: scene-age-stash
+  - name: StashDB Scene Age Tags
+    description: Tagas based on latest scene in StashDB
+    defaultArgs:
+      mode: scene-age-stashdb
