@@ -24,7 +24,7 @@
         video.muted = keepMuted
         video.currentTime = 0
         video.play()
-            .then(() => setInterval(checkHover, 100))
+            .then(() => setInterval(checkHover, 200))
             .catch(err => {})
     }
 
