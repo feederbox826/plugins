@@ -1,0 +1,11 @@
+name: tag-color-regex
+description: Colors tags based on regex
+version: 0.0.1
+# requires: wfke
+ui:
+  requires:
+  - wfke
+  javascript:
+  - tag-color-regex.js
+  assets:
+    /: assets
