@@ -83,9 +83,9 @@ function handleKey(evt) {
   // c - toggle captions
   else if (key == "c") toggleCaptions();
   // Shift+N - Jump to next video
-  else if ((key == "N" && evt.shiftKey) || key == "MediaTrackNext") player.skipButtons().onNext()
+  else if (key == "N" && evt.shiftKey) player.skipButtons().onNext()
   // Shift+P - Jump to previous video
-  else if ((key == "P" && evt.shiftKey) || key == "MediaTrackPrevious") player.skipButtons().onPrevious()
+  else if (key == "P" && evt.shiftKey) player.skipButtons().onPrevious()
 }
 
 // constants
