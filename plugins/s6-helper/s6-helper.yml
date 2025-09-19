@@ -1,9 +1,9 @@
 name: stash-s6 helper
 description: stash-s6 helper plugin
-version: 0.1.0
+version: 0.2.0
 exec:
-  - python
-  - "{pluginDir}/s6-helper.py"
+  - sh
+  - "{pluginDir}/s6-helper.sh"
 interface: raw
 tasks:
   - name: Python reinstall
