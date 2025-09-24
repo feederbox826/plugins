@@ -20,9 +20,6 @@ BASEURL = "https://tags.feederbox.cc"
 # If you want the full archive, please contact me directly
 # https://feederbox.cc
 
-# thumb - 256x256
-# small - 512x512
-# large - 1000x1000
 # optimized - full resolution webp, but lightly compressed
 # original - Please no. This will bust my cache and the images go up to 5000x5000 @14MB ea
 
@@ -41,9 +38,6 @@ def getStashTags():
   tags = stash.find_tags(fragment="id name aliases image_path parents { id }")
   return tags
 
-def jpgStrip(filename):
-  return re.sub(r'\.\w+$', ".jpg", filename)
-
 def processFilename(media):
   hasImg = media["img"] != ""
   hasVid = media["vid"] != ""
@@ -54,8 +48,9 @@ def processFilename(media):
   elif (hasImg):
     return f"/media/{QUALITY}/{media['img']}";
   # only video, grab thumb of vid
+  # only optimized, see https://github.com/feederbox826/tags/commit/3991cd6
   else:
-    return f"/media/{QUALITY}/{jpgStrip(media['vid'])}";
+    return f"/media/optimized/{media['vid']}.webp";
 
 def url_b64(filename):
   data = base64.b64encode(tagserv_s.get(BASEURL+filename).content)
