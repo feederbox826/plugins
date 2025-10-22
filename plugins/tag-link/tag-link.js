@@ -62,10 +62,10 @@ function tagLink() {
   }
 
   function addLinkElem(id) {
-    if (document.querySelector(".tag-link")) return
+    if (document.querySelector(".fbox-tag-link")) return
     // create element to mimic external link
     const linkParent = document.createElement("a")
-    linkParent.classList = "tag-link external-links-button dropdown"
+    linkParent.classList = "fbox-tag-link external-links-button dropdown"
     linkParent.href = `https://stashdb.org/tags/${id}`
     linkParent.target = "_blank"
     linkParent.rel = "noopener noreferrer"
@@ -84,7 +84,7 @@ function tagLink() {
   // set ratings
   async function addLink() {
     if (!document.querySelector("#tag-page")) return
-    if (document.querySelector(".tag-link")) return
+    if (document.querySelector(".fbox-tag-link")) return
     const tagName = document.querySelector(".tag-name").textContent.trim()
     const tagId = await getTag(tagName)
     if (!tagId) {
