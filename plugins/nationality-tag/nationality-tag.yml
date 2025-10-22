@@ -1,0 +1,11 @@
+name: nationality-tag
+description: Tag performers with nationalities
+version: 0.1.0
+exec:
+  - nationality-tag.js
+interface: js
+tasks:
+  - name: Create Nationality Tags
+    description: Create Nationality tags
+    defaultArgs:
+      mode: create
