@@ -1,6 +1,6 @@
 name: stash-s6 helper
 description: stash-s6 helper plugin
-version: 0.2.0
+version: 0.3.0
 exec:
   - sh
   - "{pluginDir}/s6-helper.sh"
@@ -10,3 +10,7 @@ tasks:
     description: Install all python dependencies
     defaultArgs:
       mode: install
+  - name: Print log
+    description: Print stash-s6 log
+    defaultArgs:
+      mode: print_log
