@@ -1,0 +1,16 @@
+name: tag-stashid
+description: link local tags to stashDB
+version: 0.0.1
+exec:
+  - python
+  - "{pluginDir}/tag-stashid.py"
+interface: raw
+tasks:
+  - name: tags.feederbox.cc
+    description: Get exact tag matches from tags.feederbox.cc
+    defaultArgs:
+      mode: feederbox
+  - name: StashDB exact
+    description: Get Exact tag matches from StashDB
+    defaultArgs:
+      mode: stashdb-exact
