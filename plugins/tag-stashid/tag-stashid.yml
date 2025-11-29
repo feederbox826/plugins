@@ -1,6 +1,6 @@
 name: tag-stashid
 description: link local tags to stashDB
-version: 0.0.1
+version: 0.0.2
 exec:
   - python
   - "{pluginDir}/tag-stashid.py"

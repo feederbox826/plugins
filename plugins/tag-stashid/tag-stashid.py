@@ -1,6 +1,6 @@
 import stashapi.log as log
 from stashapi.stashapp import StashInterface
-from stashapi.stashdb import StashDBInterface
+from stashapi.stashbox import StashBoxInterface
 import sys
 import requests
 import json
@@ -21,7 +21,7 @@ def updateTag(tagid, stashid):
 json_input = json.loads(sys.stdin.read())
 FRAGMENT_SERVER = json_input["server_connection"]
 stash = StashInterface(FRAGMENT_SERVER)
-stashdb = StashDBInterface({ "endpoint": SDB_ENDPOINT, stash: stash })
+stashdb = StashBoxInterface(conn={ "endpoint": SDB_ENDPOINT, "stash": stash })
 
 
 # tags
@@ -47,15 +47,18 @@ def syncStashDBExact():
   localTags = getStashTags()
   for tag in localTags:
     tagName = tag["name"]
+    # check if tag already has stashid
+    if any(sid["endpoint"] == SDB_ENDPOINT for sid in tag.get("stash_ids", [])):
+      log.trace(f"Tag '{tagName}' already has StashDB endpoint, skipping.")
+      continue
     stashdbTag = stashdb.find_tag(tagName)
     if stashdbTag is None:
       log.debug(f"Tag '{tagName}' not found in StashDB, skipping.")
       continue
-    remoteStashID = stashdbTag.get("id", None)
-    localStashIDs = [sid["stash_id"] for sid in tag.get("stash_ids", [])]
-    if remoteStashID in localStashIDs:
-      log.debug(f"Tag '{tagName}' already has Stash ID '{remoteStashID}', skipping.")
+    if len(stashdbTag) != 1:
+      log.debug(f"Tag '{tagName}' found multiple times in StashDB, skipping.")
       continue
+    remoteStashID = stashdbTag.get("id", None)
     log.info(f"Updating tag '{tagName}' with Stash ID '{remoteStashID}'.")
     updateTag(tag["id"], remoteStashID)
 
