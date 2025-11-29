@@ -64,8 +64,5 @@ if 'mode' in json_input['args']:
   if 'feederbox' in PLUGIN_ARGS:
     syncFeederboxTags()
   elif 'stashdb-exact' in PLUGIN_ARGS:
-    REFRESH = True
-    pass
-  elif 'stashdb-alias' in PLUGIN_ARGS:
-    FORCE_OVERWRITE = True
+    syncStashDBExact()
     pass
