@@ -2,13 +2,15 @@ name: Rebrand
 description: Adds a name override of your choice in Stash
 # requires: forbiddenConfig
 # requires: wfke
-version: 0.4.0
+version: 0.4.1
 ui:
   requires:
   - forbiddenConfig
   - wfke
   javascript:
   - rebrand.js
+  assets:
+    /: icons
 settings:
   name:
     displayName: Instance Name
