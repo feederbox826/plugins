@@ -8,6 +8,8 @@ const tagSearchInterceptor = async (data, query) => {
     if (!data?.data?.findTags) return data
     // check our request
     if (query?.operationName !== "FindTagsForSelect") return data
+    // check current url
+    if (location.pathname.startsWith("/tags")) return data
     // keep track of count for modifying
     // filter out tags in our meta-tag list
     const newTagList = data.data.findTags.tags.filter(tag => !metatags.includes(tag.id))
