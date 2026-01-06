@@ -1,0 +1,6 @@
+name: quicksave
+description: adds quick backups to stash
+version: 0.1.0
+ui:
+  javascript:
+  - quicksave.js
