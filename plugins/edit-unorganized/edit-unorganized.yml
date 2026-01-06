@@ -8,13 +8,16 @@ settings:
     displayName: Open tab even if object is organized
     type: BOOLEAN
   targetTabScenes:
-    displayName: Name of the tab to open [details, file-info, edit]
+    displayName: Name of the tab to open for scenes
+    description: 'Available tabs: details, queue, markers, filters, file-info, history, edit'
     type: STRING
   targetTabImages:
-    displayName: Name of the tab to open [details, queue, markers, filters, file-info, history, edit]
+    displayName: Name of the tab to open for images
+    description: 'Available tabs: details, file-info, edit'
     type: STRING
   targetTabGalleries:
-    displayName: Name of the tab to open [details, chapters, edit]
+    displayName: Name of the tab to open for galleries
+    description: 'Available tabs: details, chapters, edit'
     type: STRING
 ui:
   requires:
