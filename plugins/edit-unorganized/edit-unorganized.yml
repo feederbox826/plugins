@@ -1,14 +1,23 @@
 name: edit-unorganized
-description: Default to edit tab on unorganized scenes
+description: Default to edit tab on unorganized objects (scenes, images, galleries)
 # requires: CommunityScriptsUILibrary
 # requires: wfke
-version: 0.1.0
+version: 0.2.0
 settings:
   organized:
-    displayName: Open tab even if scene is organized
+    displayName: Open tab even if object is organized
     type: BOOLEAN
-  targetTab:
-    displayName: Name of the tab to open [details, queue, markers, filters, file-info, history, edit]
+  targetTabScenes:
+    displayName: Name of the tab to open for scenes
+    description: 'Available tabs: details, queue, markers, filters, file-info, history, edit'
+    type: STRING
+  targetTabImages:
+    displayName: Name of the tab to open for images
+    description: 'Available tabs: details, file-info, edit'
+    type: STRING
+  targetTabGalleries:
+    displayName: Name of the tab to open for galleries
+    description: 'Available tabs: details, chapters, edit'
     type: STRING
 ui:
   requires:
