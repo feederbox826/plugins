@@ -96,7 +96,10 @@ def syncTags():
     return
   remoteTags = remoteTagReq.json()
   # iterate on remote tags
-  for name, media in remoteTags.items():
+  # pull length for progress
+  prog_total = len(remoteTags)
+  for i, (name, media) in enumerate(remoteTags.items()):
+    log.progress(i/prog_total)
     # skip prefixes
     for PREFIX in EXCLUDE_PREFIX:
       if name.startswith(PREFIX):
