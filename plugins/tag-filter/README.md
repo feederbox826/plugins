@@ -8,9 +8,9 @@ Adds 🧠 icon to all "Meta-Tags"
 Hide selected tags from
   - Scene tag dropdowns (`/scenes/#`)
   - Scraper automatic searching
+  - Filters
 
 Does **not** hide tag from
-  - Filter search
   - `/tags` searchbox
   - backend GQL
   - Scenes with the tag
