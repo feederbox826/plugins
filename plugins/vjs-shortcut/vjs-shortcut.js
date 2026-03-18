@@ -31,7 +31,7 @@ const navMarker = (next = true) => {
   const marker = next
     ? markers.find(marker => marker > curTime)
     : markers.toReversed().find(marker => marker < curTime-5)
-  if (marker) video.currentTime = marker;
+  if (marker) player.currentTime(marker);
 }
 
 const changePbRate = (increase = true) => {
@@ -94,8 +94,10 @@ function init() {
   player.on("keydown", handleKey);
   // once scene info is loaded, get framerate
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
-  // parse markers
-  markers = player.markers().markers.map(marker => marker.time);
+  // parse markers once they have been added
+  wfke(".vjs-marker, .vjs-marker-range", () => {
+    markers = player.markers().markers.map((marker) => marker.seconds);
+  });
   document.dispatchEvent(new CustomEvent("vjs-shortcut:ready", { "detail": { player } }));
 }
 PluginApi.Event.addEventListener("stash:location", () => wfke("video-js", init))
