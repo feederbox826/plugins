@@ -8,11 +8,11 @@ Index URL: `https://feederbox826.github.io/plugins/main/index.yml`
 autovr
 - automatically select and enter appropate VR modes
 
-avg-rating
-- adds average rating to (studios, performers, movies) in %
-
 cuptag
 - Tag performers with cup sizes
+
+custom-filepath
+- transform path (to link)
 
 edit-unorganized
 - Jumps to a chosen tab when an unorganized (or organized) scene is opened
@@ -29,6 +29,12 @@ markergen
 overlay-info
 - add video codec, css classes to overlay data (resolution, codec)
 
+performer-age
+- tag performers with correspondingage tags
+
+quicksave
+- backup your stash with `ctrl + s`
+
 rebrand
 - add a custom name instead of "Stash" to identify your instance(s)
 - add a custom favicon
@@ -40,9 +46,6 @@ stash-omnisearch
 - fork of [stash-omnisearch](https://github.com/hozaywut/stash-omnisearch) for v24+
 - Licenced ISC
 
-stash-open
-- plugin component of [StashOpen](https://github.com/feederbox826/StashOpen) to allow for local video playback
-
 stashdb-fullimg
 - Adds full-size image download from StashDB
 
@@ -53,24 +56,11 @@ tag-filter
 - Marks tags as "Meta-Tags"
 - Filters out tags from select menus
 
-tag-graph-js
-- Tag graph visualization with d3.js
-- [stg-annon/tagGraph](https://github.com/stg-annon/StashScripts/tree/main/plugins/tagGraph) is recommended in lieu of this plugin
-
-tag-import
-- import tags from https://tags.feederbox.cc
-
-tag-link
-- Tries linking local tags to StashDB, adds link icon
-
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
 
 tagger-img-res
 - adds resolution indicators to tagger view
-
-watched-video
-- adds badge and css class to watched videos
 
 useragent
 - update stash User-Agent to latest
@@ -83,6 +73,9 @@ vjs-shortcut
 
 vjs-vr-zoom
 - Add mouse wheel zoom to VR scenes
+
+watched-video
+- adds badge and css class to watched videos
 
 # Dependency plugins
 0gql-intercept
