@@ -11,7 +11,6 @@ c - activate/ deactivate captions
 
 // declarations
 let player, framestep;
-let checkedMarkers = false;
 let markers = [];
 
 wfke("video-js", init);
@@ -28,10 +27,6 @@ const toggleCaptions = () => {
 }
 
 const navMarker = (next = true) => {
-  // check for markers at runtime
-  // since they're not initialized
-  markers = player.markers().markers.map(marker => marker.seconds);
-  if (!markers.length) checkedMarkers = true;
   const curTime = player.currentTime();
   const marker = next
     ? markers.find(marker => marker > curTime)
@@ -99,6 +94,10 @@ function init() {
   player.on("keydown", handleKey);
   // once scene info is loaded, get framerate
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
+  // parse markers once they have been added
+  wfke(".vjs-marker, .vjs-marker-range", () => {
+    markers = player.markers().markers.map((marker) => marker.seconds);
+  });
   document.dispatchEvent(new CustomEvent("vjs-shortcut:ready", { "detail": { player } }));
 }
 PluginApi.Event.addEventListener("stash:location", () => wfke("video-js", init))
