@@ -24,7 +24,7 @@ const getFrameRate = () =>
 const toggleCaptions = () => {
   const track = player.textTracks().tracks[0];
   track.mode = track.mode == "showing" ? "hidden" : "showing";
-};
+}
 
 const navMarker = (next = true) => {
   const curTime = player.currentTime();
@@ -74,8 +74,8 @@ function handleKey(evt) {
     evt.preventDefault();
   }
   // Ctrl + ], [ - Jump to next/previous marker
-  else if (key == "]" && evt.ctrlKey && markers.length) navMarker(true);
-  else if (key == "[" && evt.ctrlKey && markers.length) navMarker(false);
+  else if (key == "]" && !checkedMarkers && evt.ctrlKey) navMarker(true);
+  else if (key == "[" && !checkedMarkers && evt.ctrlKey) navMarker(false);
   // slow down playback rate
   else if (key == "<") changePbRate(false);
   // speed up playback rate
