@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="color-scheme" content="dark">
+  <style>
+      body {
+          font-family: sans-serif;
+          background: #111;
+          color: #eee;
+      }
+
+      .hero {
+          display: flex;
+          min-height: 98vh;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 2vmin;
+      }
+
+      input, pre {
+          width: 70%;
+          font-size: 2vmin;
+          background: #222;
+          color: #eee;
+          border-style: solid;
+      }
+
+      .input-group {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5vmin;
+          width: 100%;
+          max-width: 600px;
+      }
+
+      .input-field {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3vmin;
+      }
+
+      label {
+          font-size: 1.8vmin;
+      }
+
+      pre {
+          word-break: break-word;
+          white-space: pre-wrap;
+      }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <input id="path-input" type="text" placeholder="Original File Path">
+    
+    <div class="input-group">
+      <div class="input-field">
+        <label for="prefix-strip">prefix to strip from path</label>
+        <input id="prefix-strip" placeholder="/docker/media">
+      </div>
+      <div class="input-field">
+        <label for="prefix-add">prefix to add to path</label>
+        <input id="prefix-add" placeholder="/host/mnt/media">
+      </div>
+      <div class="input-field">
+        <label for="uri-prefix">URI prefix</label>
+        <input id="uri-prefix" placeholder="http://unraid.example.com/browse/">
+      </div>
+      <div class="input-field">
+        <label for="regex-pattern">regex pattern</label>
+        <input id="regex-pattern" placeholder="foo \d+">
+      </div>
+      <div class="input-field">
+        <label for="regex-replace">replacement string for regex</label>
+        <input id="regex-replace" placeholder="bar">
+      </div>
+      <div class="input-field">
+        <label for="uri-space">URI space replacement</label>
+        <input id="uri-space" value="%20">
+      </div>
+    </div>
+
+    <pre id="transformed-path">Final File Path</pre>
+  </div>
+  <script src="./transform.js"></script>
+  <script>
+    const target = document.getElementById('path-input');
+    const prefixStrip = document.getElementById('prefix-strip');
+    const prefixAdd = document.getElementById('prefix-add');
+    const uriPrefix = document.getElementById('uri-prefix');
+    const regexPattern = document.getElementById('regex-pattern');
+    const regexReplacement = document.getElementById('regex-replace');
+    const uriSpaceReplacement = document.getElementById('uri-space');
+    const output = document.getElementById('transformed-path');
+    // watch all inputs
+    document.querySelectorAll('input').forEach(input => {
+      input.oninput = () => {
+        const config = {
+          pathPrefixStrip: prefixStrip.value,
+          pathPrefixAdd: prefixAdd.value,
+          uriPrefix: uriPrefix.value,
+          regexPattern: regexPattern.value,
+          regexReplace: regexReplacement.value,
+          uriSpaceReplacement: uriSpaceReplacement.value
+        };
+        const transformed = transformPath(
+          target.value,
+          config
+        );
+        output.textContent = transformed;
+      };
+    });
+  </script>
+</body>
+</html>

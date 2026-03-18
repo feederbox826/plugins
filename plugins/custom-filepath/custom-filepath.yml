@@ -1,0 +1,30 @@
+name: custom-filepath
+description: Transform and/or link filepaths
+version: 0.1
+ui:
+  javascript:
+  - custom-filepath.js
+  requires:
+  - forbiddenConfig
+  - wfke
+  assets:
+    /: assets
+settings:
+  uriPrefix:
+    displayName: URI prefix (ftp:// or https://…)
+    type: STRING
+  pathPrefixStrip:
+    displayName: prefix to strip from path
+    type: STRING
+  pathPrefixAdd:
+    displayName: prefix to add to path
+    type: STRING
+  regexPattern:
+    displayName: regex pattern
+    type: STRING
+  regexReplace:
+    displayName: replacement string for regex
+    type: STRING
+  uriSpaceReplacement:
+    displayName: URI space replacement (e.g., %20)
+    type: STRING
