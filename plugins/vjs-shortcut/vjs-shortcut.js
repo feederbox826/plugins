@@ -11,6 +11,7 @@ c - activate/ deactivate captions
 
 // declarations
 let player, framestep;
+let checkedMarkers = false;
 let markers = [];
 
 wfke("video-js", init);
@@ -24,14 +25,18 @@ const getFrameRate = () =>
 const toggleCaptions = () => {
   const track = player.textTracks().tracks[0];
   track.mode = track.mode == "showing" ? "hidden" : "showing";
-};
+}
 
 const navMarker = (next = true) => {
+  // check for markers at runtime
+  // since they're not initialized
+  markers = player.markers().markers.map(marker => marker.seconds);
+  if (!markers.length) checkedMarkers = true;
   const curTime = player.currentTime();
   const marker = next
     ? markers.find(marker => marker > curTime)
     : markers.toReversed().find(marker => marker < curTime-5)
-  if (marker) video.currentTime = marker;
+  if (marker) player.currentTime(marker);
 }
 
 const changePbRate = (increase = true) => {
@@ -74,8 +79,8 @@ function handleKey(evt) {
     evt.preventDefault();
   }
   // Ctrl + ], [ - Jump to next/previous marker
-  else if (key == "]" && evt.ctrlKey && markers.length) navMarker(true);
-  else if (key == "[" && evt.ctrlKey && markers.length) navMarker(false);
+  else if (key == "]" && !checkedMarkers && evt.ctrlKey) navMarker(true);
+  else if (key == "[" && !checkedMarkers && evt.ctrlKey) navMarker(false);
   // slow down playback rate
   else if (key == "<") changePbRate(false);
   // speed up playback rate
@@ -94,8 +99,6 @@ function init() {
   player.on("keydown", handleKey);
   // once scene info is loaded, get framerate
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
-  // parse markers
-  markers = player.markers().markers.map(marker => marker.time);
   document.dispatchEvent(new CustomEvent("vjs-shortcut:ready", { "detail": { player } }));
 }
 PluginApi.Event.addEventListener("stash:location", () => wfke("video-js", init))
