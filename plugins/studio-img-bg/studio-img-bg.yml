@@ -1,11 +1,12 @@
 name: Studio background shadow
 description: Add drop shadows to studio icons for visibility
-version: 0.1.2
+version: 0.2.0
 # requires: wfke
 ui:
   requires:
   - wfke
   javascript:
+  - https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js
   - studio-img-bg.js
   css:
   - studio-img-bg.css

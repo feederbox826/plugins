@@ -1,4 +1,6 @@
 function addStudioImgBG() {
+    // idb keyval
+    const customStore = idbKeyval.createStore('fbox826', 'studio-img-bg')
     // image dark/light detector from
     // https://stackoverflow.com/a/38213966
     // modified to exclude alpha pixels
@@ -49,28 +51,34 @@ function addStudioImgBG() {
         // get dimensions
         const dims = await targetDimensions(lookup)
         const [brightness, alphaRatio] = queryBrightness(dims, target)
-        target.classList.add("checked")
-        target.classList.add(
-            brightness >= 155 ? "light" // if over 155, it's light
-                : brightness <= 110 ? "dark" // under 110, dark
-                : "neutral" // leave neutral
-        )
+        return brightness >= 155 ? "light" // if over 155, it's light
+            : brightness <= 110 ? "dark" // under 110, dark
+            : "neutral" // leave neutral
     }
-    const checkImages = () => document.querySelectorAll(selector).forEach(img => {
-        // clone image
-        let newImage = new Image()
-        newImage.src = img.src
-        newImage.onload = () => {
-            checkImage(newImage, img)
-            newImage = null
+    const checkImageCache = async (img) => {
+        // use src to look in cache
+        const cachedImage = await idbKeyval.get(img.src, customStore)
+        if (cachedImage) {
+            img.classList.add("checked", cachedImage)
+        } else {
+            let newImage = new Image()
+            newImage.src = img.src
+            newImage.onload = async () => {
+                const result = await checkImage(newImage, img)
+                newImage = null
+                img.classList.add("checked")
+                img.classList.add(result)
+                idbKeyval.set(img.src, result, customStore)
+            }
         }
-    })
+    }
+    const checkAllImages = () => document.querySelectorAll(selector).forEach(checkImageCache)
 
     // toggle to dark mode if image is dark
-    wfke(selector, checkImages)
+    wfke(selector, checkAllImages)
     PluginApi.Event.addEventListener("stash:location", () => {
         document.querySelectorAll(".studio-logo.checked").forEach(img => img.classList.remove("checked", "light", "dark", "neutral"))
-        wfke(selector, checkImages)
+        wfke(selector, checkAllImages)
     })
 }
 addStudioImgBG()
