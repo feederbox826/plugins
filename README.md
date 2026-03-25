@@ -40,7 +40,7 @@ rebrand
 - add a custom favicon
 
 skip-intro
-- skips intros of studios in the [database](https://github.com/feederbox826/stash-skip-intro)
+- skips intros based on user-defined `skip_first` custom fields
 
 stash-omnisearch
 - fork of [stash-omnisearch](https://github.com/hozaywut/stash-omnisearch) for v24+
