@@ -1,0 +1,21 @@
+name: skip-intro-sync
+description: submit intro times to skips-db
+version: 0.1.0
+url: https://github.com/feederbox826/plugins
+exec:
+  - python
+  - "{pluginDir}/skip-intro-sync.py"
+interface: raw
+tasks:
+  - name: skips-db submit
+    description: submit all local skip times to skips-db
+    defaultArgs:
+      mode: submit
+  - name: skips-db set name
+    description: set username on skips-db
+    defaultArgs:
+      mode: setname
+settings:
+  username:
+    displayName: public alias
+    type: STRING
