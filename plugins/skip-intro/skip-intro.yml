@@ -7,8 +7,10 @@ ui:
   requires:
     - CommunityScriptsUILibrary
     - 0gql-intercept
+    - fontawesome-js
   javascript:
     - skip-intro.js
+    - skip-intro-ui.js
   csp:
     connect-src:
       - https://skips.feederbox.cc
