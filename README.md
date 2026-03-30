@@ -26,6 +26,9 @@ log-toast
 markergen
 - generate markers once they've been saved
 
+nationality-tag
+- tags perofmers with nationality
+
 overlay-info
 - add video codec, css classes to overlay data (resolution, codec)
 
@@ -35,12 +38,11 @@ performer-age
 quicksave
 - backup your stash with `ctrl + s`
 
-rebrand
-- add a custom name instead of "Stash" to identify your instance(s)
-- add a custom favicon
-
 skip-intro
 - skips intros based on user-defined `skip_first` custom fields
+
+skip-intro-sync
+- contribute skip_first back to [skips-db](https://github.com/feederbox826/skips-db)
 
 stash-omnisearch
 - fork of [stash-omnisearch](https://github.com/hozaywut/stash-omnisearch) for v24+
@@ -52,9 +54,15 @@ stashdb-fullimg
 studio-img-bg
 - Add drop shadows to studio logos
 
+tag-color-regex
+- Adds coloring to tags based on regex filter (WIP)
+
 tag-filter
 - Marks tags as "Meta-Tags"
 - Filters out tags from select menus
+
+tag-import
+- import video/ image tags from `tags.feederbox.cc`
 
 tag-video
 - support `<videos>` in tags, useful for having large walls of animated tags (Animated GIFs are not optimized)
