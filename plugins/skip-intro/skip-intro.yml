@@ -2,10 +2,13 @@ name: skip-intro
 description: Skips static duration intros
 # requires: 0gql-intercept
 # requires: CommunityScriptsUILibrary
-version: 0.3.0
+version: 0.3.1
 ui:
   requires:
     - CommunityScriptsUILibrary
     - 0gql-intercept
   javascript:
     - skip-intro.js
+  csp:
+    connect-src:
+      - https://skips.feederbox.cc
