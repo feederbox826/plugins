@@ -38,6 +38,9 @@ performer-age
 quicksave
 - backup your stash with `ctrl + s`
 
+rebrand
+- update stash navbar to reflect custom name
+
 skip-intro
 - skips intros based on user-defined `skip_first` custom fields
 
