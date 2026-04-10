@@ -30,7 +30,7 @@ const setUserAgent = (userAgent) => {
 
 // choose from current, ff or chrome
 const getUserAgent = (choice) =>
-    fetch("https://jnrbsn.github.io/user-agents/user-agents.json")
+    fetch("https://feederbox826.github.io/user-agents/user-agents.json")
         .then(res => res.json())
         .then(userAgents => choice == "firefox" ? userAgents[9] : userAgents[3])
 

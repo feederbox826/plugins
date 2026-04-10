@@ -2,7 +2,7 @@
 
 Updates stash scraper User-Agent
 
-Uses https://github.com/jnrbsn/user-agents as an API
+Uses https://github.com/feederbox826/user-agents as an API
 
 Choose from
 
