@@ -132,18 +132,11 @@ def syncTags():
       if REFRESH:
         # get updated_at time of tag
         tagUpdatedAt = datetime.strptime(localTag["updated_at"], '%Y-%m-%dT%H:%M:%S%z')
-        # get content-type of media
-        tagContentType = tagserv_s.head(BASEURL+filename).headers["Content-Type"]
-        tagType = tagContentType.split("/")[0]
         # get updated_at time of media
         mediaLastModified = tagserv_s.head(BASEURL+filename).headers["Last-Modified"]
         mediaUpdatedAt = datetime.strptime(mediaLastModified, '%a, %d %b %Y %H:%M:%S %Z').replace(tzinfo=timezone.utc)
         # compare
-        if tagType == "image" and filename.endswith(".webm"):
-          log.info("tag is image but media is video, refreshing: " + name)
-          updateTag(localTag.get("id"), filename)
-          continue
-        elif mediaUpdatedAt > tagUpdatedAt:
+        if mediaUpdatedAt > tagUpdatedAt:
           log.info("refreshing existing tag: " + name)
           updateTag(localTag.get("id"), filename)
           continue
