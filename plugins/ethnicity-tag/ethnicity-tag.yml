@@ -1,0 +1,11 @@
+name: ethnicity-tag
+description: Tag performers with ethnicities
+version: 0.1.0
+exec:
+  - ethnicity-tag.js
+interface: js
+tasks:
+  - name: Create Ethnicity Tags
+    description: Create Ethnicity tags
+    defaultArgs:
+      mode: create

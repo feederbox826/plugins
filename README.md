@@ -17,6 +17,9 @@ custom-filepath
 edit-unorganized
 - Jumps to a chosen tab when an unorganized (or organized) scene is opened
 
+ethnicity-tag
+- Adds ethnicity tags to performers, similar to [nationality-tag](plugins/nationality-tag/)
+
 log-console
 - log-toast but to console instead of toasts
 
