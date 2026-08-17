@@ -28,6 +28,6 @@ const createCDNUrl = async (stashid) =>
         variables: { id: stashid }
     })
     .then(resp => resp.findScene.images[0].id)
-    .then(id => `https://cdn.stashdb.org/images/${id.substring(0,2)}/${id.substring(2,4)}/${id}`)
+    .then(id => `https://cdn.stashdb.org/images/${id}?size=full`)
 
 window.fbox826.interceptors.push(fullImgInt)
