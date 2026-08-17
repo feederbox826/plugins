@@ -1,6 +1,6 @@
 name: stashdb-fullimg
 description: Download full-size images from StashDB
-version: 0.2.0
+version: 0.2.1
 # requires: 0gql-intercept
 # requires: stashdb-api
 # requires: tagger-img-res
@@ -13,4 +13,4 @@ ui:
   - stashdb-fullimg.js
   csp:
     connect-src:
-      - https://cdn.stashdb.org
+      - https://stashdb.org
