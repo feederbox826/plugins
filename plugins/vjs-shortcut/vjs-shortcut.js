@@ -91,6 +91,10 @@ function handleKey(evt) {
 // constants
 function init() {
   player = document.querySelector("video-js").player;
+  // init() runs again on every `stash:location` event, so drop the previous
+  // navigation's handler before re-binding -- otherwise one copy accumulates per
+  // scene opened and a single keypress steps that many frames.
+  player.off("keydown", handleKey);
   player.on("keydown", handleKey);
   // once scene info is loaded, get framerate
   wfke(".scene-file-info", () => framestep = 1 / getFrameRate());
