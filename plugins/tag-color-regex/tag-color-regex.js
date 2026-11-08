@@ -2,9 +2,13 @@
   'use strict'
   
   const parseConfig = () => {
-    const config = localStorage.getItem("fbox-tag-color-regex-config", "{}")
-    const parsedConfig = JSON.parse(config)
-    return parsedConfig
+    // getItem has no default argument: it returns null when no config was ever saved
+    const config = localStorage.getItem("fbox-tag-color-regex-config") ?? "{}"
+    try {
+      return JSON.parse(config) ?? {}
+    } catch {
+      return {}
+    }
   }
   
   const colorAll = () => wfke(".tag-item", () => {
